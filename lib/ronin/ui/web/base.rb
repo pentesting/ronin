@@ -57,7 +57,7 @@ module Ronin
 
             File.new(full_path,'rb')
           else
-            404
+            [404, {'Content-Type' => 'text/html'}, erb(:"404")]
           end
         end
 
