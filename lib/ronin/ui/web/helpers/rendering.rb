@@ -28,7 +28,6 @@ module Ronin
       module Helpers
         module Rendering
           include Rack::Utils
-          include Templates::Erb
 
           alias :h :escape_html
 
