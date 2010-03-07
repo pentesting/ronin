@@ -31,7 +31,36 @@ module Ronin
           include Templates::Erb
 
           alias :h :escape_html
-          alias :render :erb_file
+
+          #
+          # Finds a template within the static-resource directories and
+          # renders it.
+          #
+          # @param [Symbol] engine
+          #   The template engine to use.
+          #
+          # @param [Symbol]
+          #   The name of the template to search for.
+          #
+          # @param [Hash] options
+          #   Additional options to render the template with.
+          #
+          # @option options [Symbol, Boolean] :layout
+          #   If set to false, no layout is rendered, otherwise
+          #   the specified layout is used.
+          #
+          # @option options [Hash] :locals
+          #   Local variables that should be available in the template.
+          #
+          def render(engine,template,options={},locals={})
+            full_path = find_static_file(template.to_s)
+
+            unless full_path
+              raise(RuntimeError,"could not find the template #{template}",caller)
+            end
+
+            return super(engine,full_path,options,locals)
+          end
 
           #
           # Renders a partial page.
