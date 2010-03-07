@@ -41,10 +41,6 @@ module Ronin
 
         helpers Helpers::Rendering
 
-        get '/' do
-          erb :"404"
-        end
-
         error 404 do
           erb :"404"
         end
