@@ -93,6 +93,7 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/command_line/commands/list.rb",
     "lib/ronin/ui/command_line/commands/uninstall.rb",
     "lib/ronin/ui/command_line/commands/update.rb",
+    "lib/ronin/ui/command_line/commands/web_app.rb",
     "lib/ronin/ui/command_line/exceptions.rb",
     "lib/ronin/ui/command_line/exceptions/unknown_command.rb",
     "lib/ronin/ui/console.rb",
@@ -106,6 +107,9 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/output/helpers.rb",
     "lib/ronin/ui/output/output.rb",
     "lib/ronin/ui/shell.rb",
+    "lib/ronin/ui/web.rb",
+    "lib/ronin/ui/web/app.rb",
+    "lib/ronin/ui/web/base.rb",
     "lib/ronin/version.rb",
     "ronin.gemspec",
     "spec/arch_spec.rb",
@@ -249,6 +253,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<contextify>, [">= 0.1.4"])
       s.add_runtime_dependency(%q<pullr>, [">= 0.1.2"])
       s.add_runtime_dependency(%q<thor>, [">= 0.13.0"])
+      s.add_runtime_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_runtime_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_development_dependency(%q<yard>, [">= 0.5.3"])
@@ -269,6 +274,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<contextify>, [">= 0.1.4"])
       s.add_dependency(%q<pullr>, [">= 0.1.2"])
       s.add_dependency(%q<thor>, [">= 0.13.0"])
+      s.add_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_dependency(%q<yard>, [">= 0.5.3"])
@@ -290,6 +296,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<contextify>, [">= 0.1.4"])
     s.add_dependency(%q<pullr>, [">= 0.1.2"])
     s.add_dependency(%q<thor>, [">= 0.13.0"])
+    s.add_dependency(%q<sinatra>, [">= 0.9.4"])
     s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
     s.add_dependency(%q<yard>, [">= 0.5.3"])

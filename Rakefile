@@ -27,6 +27,7 @@ begin
     gem.add_dependency 'contextify', '~> 0.1.5'
     gem.add_dependency 'pullr', '~> 0.1.2'
     gem.add_dependency 'thor', '~> 0.13.0'
+    gem.add_dependency 'sinatra', '~> 0.9.4'
     gem.add_dependency 'ronin-ext', '~> 0.1.0'
     gem.add_development_dependency 'rspec', '~> 1.3.0'
     gem.add_development_dependency 'yard', '~> 0.5.3'
