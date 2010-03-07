@@ -37,10 +37,26 @@ module Ronin
         set :debug, false
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
+        set :intro, true
+        set :intro_completed, false
 
         configure do
           Config.load
           Database.setup
+        end
+
+        get '/' do
+          if (App.intro && !(App.intro_completed))
+            @intro = true
+          end
+
+          result = erb :index
+
+          if @intro
+            App.intro_completed = true
+          end
+
+          result
         end
 
       end
