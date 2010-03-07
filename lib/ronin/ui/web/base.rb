@@ -42,7 +42,7 @@ module Ronin
           if full_path
             ext = File.extname(full_path)
 
-            if ext
+            unless (ext.empty? || ext == '.')
               content_type ext.to_sym
             end
 
