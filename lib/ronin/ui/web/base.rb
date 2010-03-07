@@ -36,7 +36,7 @@ module Ronin
         # The `views/` directory for the Web UI
         VIEWS_DIR = File.join('ronin','ui','web','views')
 
-        enable :sessions
+        enable :methodoverride, :sessions
 
         not_found do
           full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
