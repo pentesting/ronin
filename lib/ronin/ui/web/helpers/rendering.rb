@@ -60,11 +60,11 @@ module Ronin
           #
           def render(engine,template,options={},locals={})
             views_dir = (options[:views] || Rendering::VIEWS_DIR)
-            template = File.join(views_dir,template)
-            full_path = find_static_file(template)
+            path = File.join(views_dir,"#{template}.#{engine}")
+            full_path = find_static_file(path)
 
             unless full_path
-              raise(RuntimeError,"could not find the template #{template}",caller)
+              raise(RuntimeError,"could not find the template #{template} in #{page}",caller)
             end
 
             return super(engine,full_path,options,locals)
