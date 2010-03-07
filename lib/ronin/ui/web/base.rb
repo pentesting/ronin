@@ -25,6 +25,21 @@ module Ronin
     module Web
       class Base < Sinatra::Base
 
+        # The public/ directory for the Web UI
+        PUBLIC_DIR = File.join('ronin','ui','web','public')
+
+        #
+        # Sets the public directory for a Web app.
+        #
+        # @param [String] static_dir
+        #   The path to the apps static-content directory.
+        #
+        # @since 0.4.0
+        #
+        def self.public!(static_dir)
+          set :public, File.join(static_dir,PUBLIC_DIR)
+        end
+
       end
     end
   end
