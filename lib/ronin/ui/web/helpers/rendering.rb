@@ -32,6 +32,9 @@ module Ronin
 
           alias :h :escape_html
 
+          # The `views/` directory for the Web UI
+          VIEWS_DIR = File.join('ronin','ui','web','views')
+
           #
           # Finds a template within the static-resource directories and
           # renders it.
@@ -53,7 +56,8 @@ module Ronin
           #   Local variables that should be available in the template.
           #
           def render(engine,template,options={},locals={})
-            full_path = find_static_file(template.to_s)
+            template = File.join(Rendering::VIEWS_DIR,template.to_s)
+            full_path = find_static_file(template)
 
             unless full_path
               raise(RuntimeError,"could not find the template #{template}",caller)

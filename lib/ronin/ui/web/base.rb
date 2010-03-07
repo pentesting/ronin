@@ -34,9 +34,6 @@ module Ronin
         # The `public/` directory for the Web UI
         PUBLIC_DIR = File.join('ronin','ui','web','public')
 
-        # The `views/` directory for the Web UI
-        VIEWS_DIR = File.join('ronin','ui','web','views')
-
         enable :methodoverride, :sessions
 
         helpers Helpers::Rendering
