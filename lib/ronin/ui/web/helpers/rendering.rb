@@ -68,13 +68,22 @@ module Ronin
           # @param [String] page
           #   Name of the partial to render.
           #
+          # @param [Hash] options
+          #   Additional options.
+          #
+          # @option options [Symbol] :engine (:erb)
+          #   The template engine to use.
+          #
           # @return [String]
           #   The rendered page.
           #
           # @since 0.4.0
           #
-          def partial(page)
-            render("_#{page}")
+          def partial(page,options={})
+            engine = (options[:engine] || :erb)
+            template = :"_#{page}"
+
+            return render(engine,template,options.merge(:layout => false))
           end
 
           #
