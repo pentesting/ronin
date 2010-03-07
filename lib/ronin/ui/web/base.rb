@@ -34,6 +34,7 @@ module Ronin
         # The `public/` directory for the Web UI
         PUBLIC_DIR = File.join('ronin','ui','web','public')
 
+        set :environment, :production
         enable :methodoverride, :sessions
 
         helpers Helpers::Rendering
