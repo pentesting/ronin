@@ -18,31 +18,19 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/ui/web/base'
-require 'ronin/ui/web/apps'
-require 'ronin/database'
-require 'ronin/config'
+require 'open_nemaspace'
 
 module Ronin
   module UI
     module Web
-      class App < Base
+      #
+      # The {Apps} namespace contains all of the Web UI sub-apps which
+      # are loaded into {App}.
+      #
+      module Apps
+        include OpenNamespace
 
-        # Default host to run the Web UI on
-        DEFAULT_HOST = 'localhost'
-
-        # Default port to run the Web UI on
-        DEFAULT_PORT = 3030
-
-        set :debug, false
-        set :host, DEFAULT_HOST
-        set :port, DEFAULT_PORT
-
-        configure do
-          Config.load
-          Database.setup
-        end
-
+        self.namespace_root = File.join('ronin','ui','web','apps')
       end
     end
   end
