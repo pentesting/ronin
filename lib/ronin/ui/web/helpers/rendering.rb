@@ -48,6 +48,9 @@ module Ronin
           # @param [Hash] options
           #   Additional options to render the template with.
           #
+          # @option options [String] :views (VIEWS_DIR)
+          #   The `views/` directory to search within.
+          #
           # @option options [Symbol, Boolean] :layout
           #   If set to false, no layout is rendered, otherwise
           #   the specified layout is used.
@@ -56,7 +59,8 @@ module Ronin
           #   Local variables that should be available in the template.
           #
           def render(engine,template,options={},locals={})
-            template = File.join(Rendering::VIEWS_DIR,template.to_s)
+            views_dir = (options[:views] || Rendering::VIEWS_DIR)
+            template = File.join(views_dir,template)
             full_path = find_static_file(template)
 
             unless full_path
