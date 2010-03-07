@@ -178,7 +178,8 @@ Gem::Specification.new do |s|
     "spec/ui/output_spec.rb",
     "static/ronin/platform/overlay.xsl",
     "static/ronin/ui/web/public/css/page.css",
-    "static/ronin/ui/web/public/js/jquery.min.js"
+    "static/ronin/ui/web/public/js/jquery.min.js",
+    "static/ronin/ui/web/views/404.erb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin}
