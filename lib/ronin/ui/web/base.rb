@@ -40,6 +40,12 @@ module Ronin
           full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
 
           if full_path
+            ext = File.extname(full_path)
+
+            if ext
+              content_type ext.to_sym
+            end
+
             File.new(full_path,'rb')
           end
         end
