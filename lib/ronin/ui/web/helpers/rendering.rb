@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/templates/erb'
+require 'static_paths/finders'
 
 require 'rack/utils'
 
@@ -27,6 +27,7 @@ module Ronin
     module Web
       module Helpers
         module Rendering
+          include StaticPaths::Finders
           include Rack::Utils
 
           alias :h :escape_html
