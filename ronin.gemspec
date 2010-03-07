@@ -111,6 +111,8 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/web.rb",
     "lib/ronin/ui/web/app.rb",
     "lib/ronin/ui/web/base.rb",
+    "lib/ronin/ui/web/helpers.rb",
+    "lib/ronin/ui/web/helpers/rendering.rb",
     "lib/ronin/version.rb",
     "ronin.gemspec",
     "spec/arch_spec.rb",
