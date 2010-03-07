@@ -77,6 +77,8 @@ module Ronin
           # @return [String]
           #   The rendered page.
           #
+          # @see #render
+          #
           # @since 0.4.0
           #
           def partial(page,options={})
