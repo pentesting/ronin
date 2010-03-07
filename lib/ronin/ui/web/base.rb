@@ -25,8 +25,11 @@ module Ronin
     module Web
       class Base < Sinatra::Base
 
-        # The public/ directory for the Web UI
+        # The `public/` directory for the Web UI
         PUBLIC_DIR = File.join('ronin','ui','web','public')
+
+        # The `views/` directory for the Web UI
+        VIEWS_DIR = File.join('ronin','ui','web','views')
 
         #
         # Sets the public directory for a Web app.
