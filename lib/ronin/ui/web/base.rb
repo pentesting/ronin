@@ -34,10 +34,20 @@ module Ronin
         # The `public/` directory for the Web UI
         PUBLIC_DIR = File.join('ronin','ui','web','public')
 
+        set :views, '/'
+
         set :environment, :production
         enable :methodoverride, :sessions
 
         helpers Helpers::Rendering
+
+        get '/' do
+          erb :"404"
+        end
+
+        error 404 do
+          erb :"404"
+        end
 
         not_found do
           full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
