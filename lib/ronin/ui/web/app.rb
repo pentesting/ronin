@@ -19,6 +19,7 @@
 #
 
 require 'ronin/ui/web/base'
+require 'ronin/config'
 
 module Ronin
   module UI

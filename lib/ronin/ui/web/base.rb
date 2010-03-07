@@ -18,12 +18,17 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/config'
+
 require 'sinatra/base'
+require 'static_paths/finders'
 
 module Ronin
   module UI
     module Web
       class Base < Sinatra::Base
+
+        include StaticPaths::Finders
 
         # The `public/` directory for the Web UI
         PUBLIC_DIR = File.join('ronin','ui','web','public')
@@ -31,16 +36,12 @@ module Ronin
         # The `views/` directory for the Web UI
         VIEWS_DIR = File.join('ronin','ui','web','views')
 
-        #
-        # Sets the public directory for a Web app.
-        #
-        # @param [String] static_dir
-        #   The path to the apps static-content directory.
-        #
-        # @since 0.4.0
-        #
-        def self.public!(static_dir)
-          set :public, File.join(static_dir,PUBLIC_DIR)
+        not_found do
+          full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
+
+          if full_path
+            File.new(fulle_path,'rb')
+          end
         end
 
       end
