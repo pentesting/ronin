@@ -45,7 +45,7 @@ module Ronin
             ext = File.extname(full_path)
 
             unless (ext.empty? || ext == '.')
-              content_type ext.to_sym
+              content_type ext[1..-1].to_sym
             end
 
             File.new(full_path,'rb')
