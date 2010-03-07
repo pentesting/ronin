@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "bin/ronin-list",
     "bin/ronin-uninstall",
     "bin/ronin-update",
+    "config.ru",
     "lib/ronin.rb",
     "lib/ronin/arch.rb",
     "lib/ronin/author.rb",
