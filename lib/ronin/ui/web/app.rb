@@ -19,6 +19,7 @@
 #
 
 require 'ronin/ui/web/base'
+require 'ronin/database'
 require 'ronin/config'
 
 module Ronin
@@ -35,6 +36,11 @@ module Ronin
         set :debug, false
         set :host, DEFAULT_HOST
         set :port, DEFAULT_PORT
+
+        configure do
+          Config.load
+          Database.setup
+        end
 
       end
     end
