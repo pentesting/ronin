@@ -40,7 +40,7 @@ module Ronin
           full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
 
           if full_path
-            File.new(fulle_path,'rb')
+            File.new(full_path,'rb')
           end
         end
 
