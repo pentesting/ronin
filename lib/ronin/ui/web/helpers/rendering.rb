@@ -64,10 +64,12 @@ module Ronin
             full_path = find_static_file(path)
 
             unless full_path
-              raise(RuntimeError,"could not find the template #{template} in #{page}",caller)
+              raise(RuntimeError,"could not find the template #{template} in #{views_dir}",caller)
             end
 
-            return super(engine,full_path,options,locals)
+            template_path = full_path.sub(/\..*$/,'').to_sym
+
+            return super(engine,template_path,options,locals)
           end
 
           #
