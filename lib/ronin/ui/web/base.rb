@@ -56,6 +56,8 @@ module Ronin
             end
 
             File.new(full_path,'rb')
+          else
+            404
           end
         end
 
