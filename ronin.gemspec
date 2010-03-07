@@ -173,7 +173,8 @@ Gem::Specification.new do |s|
     "spec/ui/command_line/classes/test_command.rb",
     "spec/ui/command_line/command_spec.rb",
     "spec/ui/output_spec.rb",
-    "static/ronin/platform/overlay.xsl"
+    "static/ronin/platform/overlay.xsl",
+    "static/ronin/ui/web/public/css/page.css"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin}
