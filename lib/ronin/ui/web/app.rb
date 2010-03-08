@@ -40,11 +40,6 @@ module Ronin
         set :intro, true
         set :intro_completed, false
 
-        configure do
-          Config.load
-          Database.setup
-        end
-
         get '/' do
           if (App.intro && !(App.intro_completed))
             @intro = true

@@ -41,6 +41,11 @@ module Ronin
 
         helpers Helpers::Rendering
 
+        configure do
+          Config.load
+          Database.setup
+        end
+
         error 404 do
           erb :"404"
         end
