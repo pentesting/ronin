@@ -84,7 +84,7 @@ module Ronin
         Database.setup
 
         Rack::Handler.get(DEFAULT_SERVER).run(
-          Router.app,
+          Router.create,
           :Host => (options[:host] || DEFAULT_HOST),
           :Port => (options[:port] || DEFAULT_PORT)
         )

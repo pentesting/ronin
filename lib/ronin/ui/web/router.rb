@@ -57,7 +57,7 @@ module Ronin
         #
         # @since 0.4.0
         #
-        def Router.app
+        def Router.create
           Router.new do
             map '/' do
               run Apps::Root
