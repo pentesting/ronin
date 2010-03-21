@@ -44,15 +44,9 @@ module Ronin
         # @since 0.4.0
         #
         def Router.sub_apps
-          unless defined?(@@ronin_ui_web_sub_apps)
-            @@ronin_ui_web_sub_apps = {}
-
-            Web.sub_apps.each do |name|
-              @@ronin_ui_web_sub_apps[name] = nil
-            end
+          @@ronin_ui_web_sub_apps ||= Hash.new do |hash,key|
+              hash[key] = Apps.require_const(key)
           end
-
-          return @@ronin_ui_web_sub_apps
         end
 
         #
@@ -72,10 +66,6 @@ module Ronin
             Router.sub_apps.each_key do |name|
               map "/#{name}" do
                 run lambda { |env|
-                  unless Router.sub_apps[name]
-                    Router.sub_apps[name] = Apps.require_const(name)
-                  end
-
                   Router.sub_apps[name].call(env)
                 }
               end
