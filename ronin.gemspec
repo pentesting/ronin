@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.date = %q{2010-03-28}
   s.description = %q{Ronin is a Ruby platform for exploit development and security research. Ronin allows for the rapid development and distribution of code, exploits or payloads over many common Source-Code-Management (SCM) systems.}
   s.email = %q{postmodern.mod3@gmail.com}
-  s.executables = ["ronin", "ronin-add", "ronin-console", "ronin-list", "ronin-help", "ronin-install", "ronin-remove", "ronin-uninstall", "ronin-update", "ronin-database", "ronin-webapp"]
+  s.executables = ["ronin", "ronin-add", "ronin-console", "ronin-list", "ronin-help", "ronin-install", "ronin-webapp", "ronin-uninstall", "ronin-update", "ronin-database"]
   s.extra_rdoc_files = [
     "ChangeLog.md",
     "README.md"
@@ -110,11 +110,12 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/output/output.rb",
     "lib/ronin/ui/shell.rb",
     "lib/ronin/ui/web.rb",
-    "lib/ronin/ui/web/app.rb",
     "lib/ronin/ui/web/apps.rb",
+    "lib/ronin/ui/web/apps/root.rb",
     "lib/ronin/ui/web/base.rb",
     "lib/ronin/ui/web/helpers.rb",
     "lib/ronin/ui/web/helpers/rendering.rb",
+    "lib/ronin/ui/web/router.rb",
     "lib/ronin/version.rb",
     "ronin.gemspec",
     "spec/arch_spec.rb",
@@ -180,7 +181,8 @@ Gem::Specification.new do |s|
     "static/ronin/platform/overlay.xsl",
     "static/ronin/ui/web/public/css/page.css",
     "static/ronin/ui/web/public/js/jquery.min.js",
-    "static/ronin/ui/web/views/404.erb"
+    "static/ronin/ui/web/views/404.erb",
+    "static/ronin/ui/web/views/index.erb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin}
@@ -261,6 +263,8 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<contextify>, [">= 0.1.4"])
       s.add_runtime_dependency(%q<pullr>, [">= 0.1.2"])
       s.add_runtime_dependency(%q<thor>, [">= 0.13.0"])
+      s.add_runtime_dependency(%q<thin>, [">= 1.2.5"])
+      s.add_runtime_dependency(%q<rack>, [">= 1.0.0"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_runtime_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
@@ -282,6 +286,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<contextify>, [">= 0.1.4"])
       s.add_dependency(%q<pullr>, [">= 0.1.2"])
       s.add_dependency(%q<thor>, [">= 0.13.0"])
+      s.add_dependency(%q<thin>, [">= 1.2.5"])
+      s.add_dependency(%q<rack>, [">= 1.0.0"])
       s.add_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
@@ -304,6 +310,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<contextify>, [">= 0.1.4"])
     s.add_dependency(%q<pullr>, [">= 0.1.2"])
     s.add_dependency(%q<thor>, [">= 0.13.0"])
+    s.add_dependency(%q<thin>, [">= 1.2.5"])
+    s.add_dependency(%q<rack>, [">= 1.0.0"])
     s.add_dependency(%q<sinatra>, [">= 0.9.4"])
     s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
