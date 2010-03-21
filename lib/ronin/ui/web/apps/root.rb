@@ -26,34 +26,27 @@ require 'ronin/config'
 module Ronin
   module UI
     module Web
-      class App < Base
+      module Apps
+        class Root < Base
 
-        # Default host to run the Web UI on
-        DEFAULT_HOST = 'localhost'
+          set :intro, true
+          set :intro_completed, false
 
-        # Default port to run the Web UI on
-        DEFAULT_PORT = 3030
+          get '/' do
+            if (Root.intro && !(Root.intro_completed))
+              @intro = true
+            end
 
-        set :debug, false
-        set :host, DEFAULT_HOST
-        set :port, DEFAULT_PORT
-        set :intro, true
-        set :intro_completed, false
+            result = erb :index
 
-        get '/' do
-          if (App.intro && !(App.intro_completed))
-            @intro = true
+            if @intro
+              Root.intro_completed = true
+            end
+
+            result
           end
 
-          result = erb :index
-
-          if @intro
-            App.intro_completed = true
-          end
-
-          result
         end
-
       end
     end
   end
