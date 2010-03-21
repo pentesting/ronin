@@ -66,6 +66,19 @@ module Ronin
       end
 
       #
+      # Returns a Rack compatible app for the Ronin Web UI.
+      #
+      # @return [Router]
+      #   The Router which routes requests to the sub-apps
+      #   within the Web UI.
+      #
+      # @since 0.4.0
+      #
+      def Web.app
+        Router.create
+      end
+
+      #
       # Starts the Ronin Web UI using the Thin web server.
       #
       # @param [Hash] options
@@ -84,7 +97,7 @@ module Ronin
         Database.setup
 
         Rack::Handler.get(DEFAULT_SERVER).run(
-          Router.create,
+          Web.app,
           :Host => (options[:host] || DEFAULT_HOST),
           :Port => (options[:port] || DEFAULT_PORT)
         )
