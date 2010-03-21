@@ -20,11 +20,8 @@
 
 require 'ronin/ui/web/apps/root'
 require 'ronin/ui/web/apps'
-require 'ronin/installation'
-require 'ronin/database'
-require 'ronin/config'
+require 'ronin/ui/web/web'
 
-require 'set'
 require 'rack'
 
 module Ronin
@@ -37,15 +34,6 @@ module Ronin
       #
       class Router < Rack::Builder
 
-        # Default host to run the Web UI on
-        DEFAULT_HOST = 'localhost'
-
-        # Default port to run the Web UI on
-        DEFAULT_PORT = 3030
-
-        # Default server to run under
-        DEFAULT_SERVER = 'Thin'
-
         #
         # The sub-app names and classes that the Router will route
         # requests to.
@@ -56,21 +44,15 @@ module Ronin
         # @since 0.4.0
         #
         def Router.sub_apps
-          unless defined?(@@ronin_ui_web_apps)
-            @@ronin_ui_web_apps = {}
+          unless defined?(@@ronin_ui_web_sub_apps)
+            @@ronin_ui_web_sub_apps = {}
 
-            pattern = File.join('lib',Apps.namespace_root,'*.rb')
-
-            Installation.each_file_in(pattern) do |path,gem|
-              name = path.gsub(/\.rb$/,'')
-
-              unless name == 'root'
-                @@ronin_ui_web_apps[name] = nil
-              end
+            Web.sub_apps.each do |name|
+              @@ronin_ui_web_sub_apps[name] = nil
             end
           end
 
-          return @@ronin_ui_web_apps
+          return @@ronin_ui_web_sub_apps
         end
 
         #
@@ -99,31 +81,6 @@ module Ronin
               end
             end
           end
-        end
-
-        #
-        # Runs the Router using the Thin web server.
-        #
-        # @param [Hash] options
-        #   Additional options.
-        #
-        # @option options [String] :host (DEFAULT_HOST)
-        #   The interface to bind to.
-        #
-        # @option options [String] :port (DEFAULT_PORT)
-        #   The port to listen on for requests.
-        #
-        # @since 0.4.0
-        #
-        def Router.start(options={})
-          Config.load
-          Database.setup
-
-          Rack::Handler.get(DEFAULT_SERVER).run(
-            Router.app,
-            :Host => (options[:host] || DEFAULT_HOST),
-            :Port => (options[:port] || DEFAULT_PORT)
-          )
         end
 
       end

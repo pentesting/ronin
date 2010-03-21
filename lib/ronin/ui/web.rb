@@ -19,4 +19,4 @@
 #
 
 require 'ronin/ui/web/base'
-require 'ronin/ui/web/app'
+require 'ronin/ui/web/web'
