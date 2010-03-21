@@ -1,0 +1,22 @@
+body {
+	padding: 1em;
+}
+
+#sub-apps-menu {
+	display: none;
+	width: 100px;
+	color: white;
+	background-color: black;
+}
+
+#sub-apps {
+	width: 100px;
+	height: 100px;
+	background-color: black;
+}
+
+#page {
+}
+
+#content {
+}
