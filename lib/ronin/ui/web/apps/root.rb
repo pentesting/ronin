@@ -29,6 +29,8 @@ module Ronin
       module Apps
         class Root < Base
 
+          self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..','..')
+
           set :intro, true
           set :intro_completed, false
 

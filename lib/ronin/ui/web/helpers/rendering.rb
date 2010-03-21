@@ -18,8 +18,6 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'static_paths/finders'
-
 require 'rack/utils'
 
 module Ronin
@@ -27,55 +25,37 @@ module Ronin
     module Web
       module Helpers
         module Rendering
-          include StaticPaths::Finders
           include Rack::Utils
 
           alias :h :escape_html
 
-          # The `views/` directory for the Web UI
-          VIEWS_DIR = File.join('ronin','ui','web','views')
-
           #
-          # Finds a template within the static-resource directories and
-          # renders it.
+          # Renders a view.
           #
-          # @param [Symbol] engine
-          #   The template engine to use.
-          #
-          # @param [Symbol]
-          #   The name of the template to search for.
+          # @param [String] name 
+          #   Name of the view to render.
           #
           # @param [Hash] options
-          #   Additional options to render the template with.
+          #   Additional options.
           #
-          # @option options [String] :views (VIEWS_DIR)
-          #   The `views/` directory to search within.
+          # @option options [Symbol] :engine (:erb)
+          #   The template engine to use.
           #
-          # @option options [Symbol, Boolean] :layout
-          #   If set to false, no layout is rendered, otherwise
-          #   the specified layout is used.
+          # @return [String]
+          #   The rendered view.
           #
-          # @option options [Hash] :locals
-          #   Local variables that should be available in the template.
+          # @since 0.4.0
           #
-          def render(engine,template,options={},locals={})
-            views_dir = (options[:views] || Rendering::VIEWS_DIR)
-            path = File.join(views_dir,"#{template}.#{engine}")
-            full_path = find_static_file(path)
+          def show(name,options={})
+            engine = (options[:engine] || :erb)
 
-            unless full_path
-              raise(RuntimeError,"could not find the template #{template} in #{views_dir}",caller)
-            end
-
-            template_path = full_path.sub(/\..*$/,'').to_sym
-
-            return super(engine,template_path,options,locals)
+            return render(engine,name.to_sym,options)
           end
 
           #
-          # Renders a partial page.
+          # Renders a partial view.
           #
-          # @param [String] page
+          # @param [String] name
           #   Name of the partial to render.
           #
           # @param [Hash] options
@@ -85,15 +65,13 @@ module Ronin
           #   The template engine to use.
           #
           # @return [String]
-          #   The rendered page.
-          #
-          # @see #render
+          #   The rendered partial view.
           #
           # @since 0.4.0
           #
-          def partial(page,options={})
+          def partial(name,options={})
             engine = (options[:engine] || :erb)
-            template = :"_#{page}"
+            template = :"_#{name}"
 
             return render(engine,template,options.merge(:layout => false))
           end

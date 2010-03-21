@@ -21,22 +21,16 @@
 require 'ronin/ui/web/helpers/rendering'
 
 require 'sinatra/base'
-require 'static_paths/finders'
 
 module Ronin
   module UI
     module Web
       class Base < Sinatra::Base
 
-        include StaticPaths::Finders
-
-        # The `public/` directory for the Web UI
-        PUBLIC_DIR = File.join('ronin','ui','web','public')
-
-        set :views, '/'
+        STATIC_DIR = File.join('static','ronin','ui','web')
 
         set :environment, :production
-        enable :methodoverride, :sessions
+        enable :methodoverride, :static, :sessions
 
         helpers Helpers::Rendering
 
@@ -44,20 +38,14 @@ module Ronin
           erb :"404"
         end
 
-        not_found do
-          full_path = find_static_file(File.join(PUBLIC_DIR,request.path))
-
-          if full_path
-            ext = File.extname(full_path)
-
-            unless (ext.empty? || ext == '.')
-              content_type ext[1..-1].to_sym
-            end
-
-            File.new(full_path,'rb')
-          else
-            [404, {'Content-Type' => 'text/html'}, erb(:"404")]
-          end
+        #
+        # Sets the root of the Web application, relative to the root
+        # of the library.
+        #
+        # @param [String] lib_root
+        #   The root of the library.
+        def self.lib_root=(lib_root)
+          set :root, File.expand_path(File.join(lib_root,STATIC_DIR))
         end
 
       end
