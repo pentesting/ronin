@@ -30,6 +30,11 @@ require 'rack'
 module Ronin
   module UI
     module Web
+      #
+      # The {Router} is in charge of receiving HTTP requests for the Web UI,
+      # auto-loading Web UI sub-apps and routing the requests to the
+      # appropriate sub-app.
+      #
       class Router < Rack::Builder
 
         # Default host to run the Web UI on
@@ -41,6 +46,15 @@ module Ronin
         # Default server to run under
         DEFAULT_SERVER = 'Thin'
 
+        #
+        # The sub-app names and classes that the Router will route
+        # requests to.
+        #
+        # @return [Hash{String => Class}]
+        #   The sub-app names and classes.
+        #
+        # @since 0.4.0
+        #
         def Router.sub_apps
           unless defined?(@@ronin_ui_web_apps)
             @@ronin_ui_web_apps = {}
@@ -59,6 +73,14 @@ module Ronin
           return @@ronin_ui_web_apps
         end
 
+        #
+        # Creates a new Router Rack app.
+        #
+        # @return [Router]
+        #   The new Router app.
+        #
+        # @since 0.4.0
+        #
         def Router.app
           Router.new do
             map '/' do
@@ -79,6 +101,20 @@ module Ronin
           end
         end
 
+        #
+        # Runs the Router using the Thin web server.
+        #
+        # @param [Hash] options
+        #   Additional options.
+        #
+        # @option options [String] :host (DEFAULT_HOST)
+        #   The interface to bind to.
+        #
+        # @option options [String] :port (DEFAULT_PORT)
+        #   The port to listen on for requests.
+        #
+        # @since 0.4.0
+        #
         def Router.start(options={})
           Config.load
           Database.setup
@@ -89,8 +125,6 @@ module Ronin
             :Port => (options[:port] || DEFAULT_PORT)
           )
         end
-
-        protected
 
       end
     end
