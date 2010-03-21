@@ -19,7 +19,6 @@
 #
 
 require 'ronin/ui/web/helpers/rendering'
-require 'ronin/config'
 
 require 'sinatra/base'
 require 'static_paths/finders'
@@ -40,11 +39,6 @@ module Ronin
         enable :methodoverride, :sessions
 
         helpers Helpers::Rendering
-
-        configure do
-          Config.load
-          Database.setup
-        end
 
         error 404 do
           erb :"404"
