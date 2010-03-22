@@ -1,3 +1,13 @@
 <h1>404 Not Found</h1>
 
-<p>The requested <a href="<%=h request.url %>">URL</a> could not be found.</p>
+<p>The requested URL could not be found.</p>
+
+<p>
+  <strong>Requested URL:</strong>
+  <kbd><%=h request.url %></kbd>
+</p>
+
+<p>
+  <strong>Referring URL:</strong>
+  <kbd><%=h request.referer %></kbd>
+</p>
