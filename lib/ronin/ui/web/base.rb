@@ -95,6 +95,14 @@ module Ronin
 
         cache_template :layout, File.join('layouts','default.erb')
         cache_template '404'
+        cache_template 'error'
+
+        error do
+          @error = request.env['sinatra.error']
+
+          status 500
+          erb :error
+        end
 
         error 404 do
           erb :"404"
