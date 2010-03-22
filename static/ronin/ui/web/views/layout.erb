@@ -9,7 +9,7 @@
 
   <body>
     <div id="sub-apps-menu">
-      <ul>
+      <ul class="apps">
         <li><a href="/">ronin</a></li>
         <% Ronin::UI::Web.sub_apps.each do |name| %>
         <li><a href="/<%=h name %>"><%=h name %></a></li>
@@ -18,6 +18,16 @@
       <div class="bottom">
         <p class="title">menu</p>
       </div>
+    </div>
+
+    <div id="app-menu">
+      <div class="left"></div>
+      <div class="links">
+        <a href="/one">One</a>
+        <a href="/two">Two</a>
+        <a href="/three">Three</a>
+      </div>
+      <div class="right"></div>
     </div>
 
     <div id="page">
