@@ -21,6 +21,7 @@
 require 'ronin/ui/web/helpers/rendering'
 
 require 'sinatra/base'
+require 'rack/flash'
 
 module Ronin
   module UI
@@ -90,6 +91,8 @@ module Ronin
 
         set :environment, :production
         enable :methodoverride, :static, :sessions
+
+        use Rack::Flash, :sweep => true
 
         helpers Helpers::Rendering
 
