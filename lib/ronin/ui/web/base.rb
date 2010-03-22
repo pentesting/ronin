@@ -26,17 +26,8 @@ module Ronin
   module UI
     module Web
       class Base < Sinatra::Base
-
+        
         STATIC_DIR = File.join('static','ronin','ui','web')
-
-        set :environment, :production
-        enable :methodoverride, :static, :sessions
-
-        helpers Helpers::Rendering
-
-        error 404 do
-          erb :"404"
-        end
 
         #
         # Sets the root of the Web application, relative to the root
@@ -46,6 +37,29 @@ module Ronin
         #   The root of the library.
         def self.lib_root=(lib_root)
           set :root, File.expand_path(File.join(lib_root,STATIC_DIR))
+        end
+
+        #
+        # Caches a template into the Web application.
+        #
+        # @param [Symbol, String] name
+        #   The name of the template.
+        #
+        # @param [String] file_name
+        #   The file name of the template.
+        #
+        # @since 0.4.0
+        #
+        def self.cache_template(name,file_name=nil)
+          if file_name
+            file_name = File.join(self.root,file_name)
+          else
+            file_name = File.join(self.views,"#{name}.erb")
+          end
+
+          template(name.to_sym) do
+            File.read(file_name)
+          end
         end
 
         #
@@ -70,6 +84,20 @@ module Ronin
         #
         def self.menu=(new_menu)
           self.menu.merge!(new_menu)
+        end
+
+        self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..')
+
+        set :environment, :production
+        enable :methodoverride, :static, :sessions
+
+        helpers Helpers::Rendering
+
+        cache_template :layout, File.join('layouts','default.erb')
+        cache_template '404'
+
+        error 404 do
+          erb :"404"
         end
 
       end
