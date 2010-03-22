@@ -19,7 +19,7 @@
 #
 
 require 'ronin/ui/command_line/command'
-require 'ronin/ui/web/app'
+require 'ronin/ui/web'
 
 module Ronin
   module UI
@@ -28,16 +28,14 @@ module Ronin
         class WebApp < Command
 
           desc 'Starts the Ronin Web UI'
-          class_option :host, :default => Web::App::DEFAULT_HOST,  :aliases => '-I'
-          class_option :port, :default => Web::App::DEFAULT_PORT, :aliases => '-p'
-          class_option :skip_intro, :type => :boolean
-          class_option :debug, :type => :boolean, :aliases => '-D'
+          class_option :host, :default => Web::DEFAULT_HOST,  :aliases => '-I'
+          class_option :port, :default => Web::DEFAULT_PORT, :aliases => '-p'
 
+          #
+          # Starts the local Ronin Web UI.
+          #
           def execute
-            Web::App.debug = options.debug?
-            Web::App.intro = !(options.skip_intro?)
-
-            Web::App.run!(:host => options[:host], :port => options[:port])
+            Web.start(:host => options[:host], :port => options[:port])
           end
 
         end
