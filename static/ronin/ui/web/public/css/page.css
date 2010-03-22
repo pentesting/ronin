@@ -1,22 +1,70 @@
 body {
-	padding: 1em;
+	font-family: sans-serif,verdana,Helvetica;
+}
+
+a {
+	text-decoration: none;
+}
+
+noscript {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 1;
+}
+
+div.error {
+	padding: 0.2em 1em;
+	color: white;
+	background-color: #bd0000;
+	font-weight: bold;
 }
 
 #sub-apps-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+}
+
+#sub-apps-menu ul {
 	display: none;
-	width: 100px;
-	color: white;
+	width: 150px;
+	padding: 0;
+	margin: 0;
+	list-style: none;
 	background-color: black;
 }
 
-#sub-apps {
-	width: 100px;
-	height: 100px;
-	background-color: black;
+#sub-apps-menu ul > li {
+	margin-left: 40px;
+}
+
+#sub-apps-menu ul > li > a {
+	color: white;
+	font-weight: bold;
+}
+
+#sub-apps-menu div.bottom {
+	width: 150px;
+	height: 150px;
+	background-image: url('/images/sub_apps_menu/bottom.png');
+}
+
+#sub-apps-menu div.bottom > p.title {
+	margin: 0 0 0 40px;
+	color: white;
+	font-weight: bold;
 }
 
 #page {
+	margin: 150px 150px 0 150px;
+	padding: 1em;
 }
 
 #content {
+	padding: 1em;
+	border: 10px solid #dadada;
 }
