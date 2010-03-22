@@ -48,6 +48,30 @@ module Ronin
           set :root, File.expand_path(File.join(lib_root,STATIC_DIR))
         end
 
+        #
+        # The menu items and their links for the Web application.
+        #
+        # @return [Hash]
+        #   The names and links for the menu.
+        #
+        # @since 0.4.0
+        #
+        def self.menu
+          @menu ||= {}
+        end
+
+        #
+        # Adds entries to the Web application's menu.
+        #
+        # @param [Hash{String => String}]
+        #   New names and links to add to the menu.
+        #
+        # @since 0.4.0
+        #
+        def self.menu=(new_menu)
+          self.menu.merge!(new_menu)
+        end
+
       end
     end
   end
