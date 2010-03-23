@@ -23,9 +23,9 @@
     <div id="app-menu">
       <div class="left"></div>
       <div class="links">
-        <a href="/one">One</a>
-        <a href="/two">Two</a>
-        <a href="/three">Three</a>
+        <% self.menu.each do |name,path| %>
+        <a href="<%=h path %>"><%=h name %></a>
+        <% end %>
       </div>
       <div class="right"></div>
     </div>
