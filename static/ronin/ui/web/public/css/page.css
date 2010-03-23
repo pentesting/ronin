@@ -107,7 +107,15 @@ div.error {
 	border: 10px solid #dadada;
 }
 
-p.flash {
+p.flash-error {
+	margin: 0.5em 0 0.5em 0;
+	padding: 0.5em;
+	color: white;
+	background-color: red;
+	font-weight: bold;
+}
+
+p.flash-notice {
 	margin: 0.5em 0 0.5em 0;
 	padding: 0.5em;
 	color: white;

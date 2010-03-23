@@ -31,8 +31,12 @@
     </div>
 
     <div id="page">
+      <% if flash[:error] %>
+      <p class="flash-error"><%=h flash[:error] %></p>
+      <% end %>
+
       <% if flash[:notice] %>
-      <p class="flash"><%=h flash[:notice] %></p>
+      <p class="flash-notice"><%=h flash[:notice] %></p>
       <% end %>
 
       <div id="content">

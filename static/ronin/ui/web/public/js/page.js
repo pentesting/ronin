@@ -7,5 +7,7 @@ $(document).ready(function() {
     $(this).slideUp("fast");
   });
 
-  $("p.flash").click(function() { $(this).slideUp(); });
+  $("p.flash-notice, p.flash-error").click(function() {
+    $(this).slideUp();
+  });
 });
