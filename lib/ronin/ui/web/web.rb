@@ -47,7 +47,7 @@ module Ronin
       #
       # @since 0.4.0
       #
-      def Web.sub_apps
+      def Web.apps
         unless defined?(@@ronin_ui_web_apps)
           @@ronin_ui_web_apps = Set[]
 

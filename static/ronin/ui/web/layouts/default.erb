@@ -11,7 +11,7 @@
     <div id="sub-apps-menu">
       <ul class="apps">
         <li><a href="/">ronin</a></li>
-        <% Ronin::UI::Web.sub_apps.each do |name| %>
+        <% Ronin::UI::Web.apps.each do |name| %>
         <li><a href="/<%=h name %>"><%=h name %></a></li>
         <% end %>
       </ul>

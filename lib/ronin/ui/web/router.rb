@@ -43,9 +43,9 @@ module Ronin
         #
         # @since 0.4.0
         #
-        def Router.sub_apps
-          @@ronin_ui_web_sub_apps ||= Hash.new do |hash,key|
-              hash[key] = Apps.require_const(key)
+        def Router.apps
+          @@ronin_ui_web_router_apps ||= Hash.new do |hash,key|
+            hash[key] = Apps.require_const(key)
           end
         end
 
@@ -63,7 +63,7 @@ module Ronin
               run Apps::Root
             end
 
-            Router.sub_apps.each_key do |name|
+            Web.apps.each do |name|
               map "/#{name}" do
                 run lambda { |env|
                   Router.sub_apps[name].call(env)
