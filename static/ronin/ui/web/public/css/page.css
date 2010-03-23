@@ -122,3 +122,8 @@ p.flash-notice {
 	background-color: #3cd434;
 	font-weight: bold;
 }
+
+div.danger {
+	padding: 0.5em;
+	border: 10px solid red;
+}
