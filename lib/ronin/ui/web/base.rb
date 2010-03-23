@@ -87,6 +87,18 @@ module Ronin
           self.menu.merge!(new_menu)
         end
 
+        #
+        # The menu of the Web application.
+        #
+        # @return [Hash{String => String}].
+        #   The menu's names and links.
+        #
+        # @since 0.4.0
+        #
+        def menu
+          self.class.menu
+        end
+
         self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..')
 
         set :environment, :production
