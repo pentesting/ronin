@@ -10,4 +10,6 @@ $(document).ready(function() {
   $("p.flash-notice, p.flash-error").click(function() {
     $(this).slideUp();
   });
+
+  $("p.flash-notice").delay(3000).slideUp();
 });
