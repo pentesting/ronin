@@ -1,0 +1,15 @@
+<h1>Uninstall Overlay</h1>
+
+<div class="danger">
+  <p>
+  Are you sure you want to uninstall the Overlay
+  <%=h @overlay %><% if @overlay.installed? %>and remove all of it's files<% end %>.
+  Click the 'Uninstall' button to proceed.
+  </p>
+
+  <form actions="/overlays/uninstall" method="post">
+    <input type="hidden" name="name" value="<%=h @overlay.name %>" />
+    <input type="hidden" name="domain" value="<%=h @overlay.domain %>" />
+    <input type="submit" value="Uninstall" />
+  </form>
+</div>

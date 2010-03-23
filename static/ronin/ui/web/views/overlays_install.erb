@@ -1,0 +1,23 @@
+<h1>Install Overlay</h1>
+
+<p>Install a remote Overlay into Ronin:</p>
+
+<form action="/overlays/install" method="post">
+  <div>
+    <label for="uri"><span class="optional">*</span> URI:</label>
+    <input name="uri" type="text" />
+  </div>
+
+  <div>
+    <label for="scm"><span class="optional">*</span> SCM:</label>
+    <select name="scm">
+      <option></option>
+      <option value="git">Git</option>
+      <option value="mercurial">Mercurial (Hg)</option>
+      <option value="sub_version">SubVersion (SVN)</option>
+      <option value="rsync">Rsync</option>
+    </select>
+  </div>
+
+  <input type="submit" value="Install" />
+</form>

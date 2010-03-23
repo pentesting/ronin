@@ -1,0 +1,11 @@
+<h1>Database Repositories</h1>
+
+<% if @repositories.empty? %>
+<p class="error">No Database repositories defined.</p>
+<% else %>
+<%   @repositories.each do |name,uri| %>
+<div>
+  <p><%=h name %>: <kbd><%=h uri %></kbd></p>
+</div>
+<%   end %>
+<% end %>
