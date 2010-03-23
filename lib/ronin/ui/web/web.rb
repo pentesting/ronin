@@ -75,7 +75,10 @@ module Ronin
       # @since 0.4.0
       #
       def Web.app
-        Router.create
+        Config.load
+        Database.setup
+
+        return Router.create
       end
 
       #
@@ -93,9 +96,6 @@ module Ronin
       # @since 0.4.0
       #
       def Web.start(options={})
-        Config.load
-        Database.setup
-
         Rack::Handler.get(DEFAULT_SERVER).run(
           Web.app,
           :Host => (options[:host] || DEFAULT_HOST),
