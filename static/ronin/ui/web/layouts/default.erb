@@ -32,7 +32,7 @@
     </div>
 
     <div id="page">
-      <% flash.each do |category,message| do %>
+      <% flash.each do |category,message| %>
       <p class="flash-<%=h category %>"><%=h message %></p>
       <% end %>
       <% flash.clear %>
