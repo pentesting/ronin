@@ -103,8 +103,6 @@ module Ronin
         set :environment, :production
         enable :methodoverride, :static, :sessions
 
-        use Rack::Flash, :sweep => true
-
         helpers Helpers::Rendering
         helpers Helpers::Session
 
