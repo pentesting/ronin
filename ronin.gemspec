@@ -184,12 +184,24 @@ Gem::Specification.new do |s|
     "static/ronin/ui/web/public/css/page.css",
     "static/ronin/ui/web/public/images/app_menu/left.png",
     "static/ronin/ui/web/public/images/app_menu/right.png",
+    "static/ronin/ui/web/public/images/diamond.png",
+    "static/ronin/ui/web/public/images/logo.png",
     "static/ronin/ui/web/public/images/sub_apps_menu/bottom.png",
     "static/ronin/ui/web/public/js/jquery.min.js",
+    "static/ronin/ui/web/public/js/json2.js",
     "static/ronin/ui/web/public/js/page.js",
+    "static/ronin/ui/web/public/js/raphael.min.js",
     "static/ronin/ui/web/views/404.erb",
+    "static/ronin/ui/web/views/about.erb",
+    "static/ronin/ui/web/views/database.erb",
     "static/ronin/ui/web/views/error.erb",
-    "static/ronin/ui/web/views/index.erb"
+    "static/ronin/ui/web/views/index.erb",
+    "static/ronin/ui/web/views/intro.erb",
+    "static/ronin/ui/web/views/overlay.erb",
+    "static/ronin/ui/web/views/overlays.erb",
+    "static/ronin/ui/web/views/overlays_add.erb",
+    "static/ronin/ui/web/views/overlays_install.erb",
+    "static/ronin/ui/web/views/overlays_uninstall.erb"
   ]
   s.has_rdoc = %q{yard}
   s.homepage = %q{http://github.com/ronin-ruby/ronin}

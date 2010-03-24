@@ -1,15 +1,42 @@
-$(document).ready(function() {
-  $("#sub-apps-menu > div.bottom").click(function() {
-    $("#sub-apps-menu > ul").slideToggle("fast");
-  });
+var Ronin = {	
+	setupAjaxCallbacks: function(){
+		$('body').ajaxStart(function () {
+			// ...
+		});
 
-  $("#sub-apps-menu > ul").click(function() {
-    $(this).slideUp("fast");
-  });
+		$('body').ajaxStop(function () {
+			// ...
+		});
 
-  $("p.flash-notice, p.flash-error").click(function() {
-    $(this).slideUp();
-  });
+		$('body').ajaxError(function (event, xhr, ajaxOptions, thrownError) {
+			console.log("XHR Response: " + JSON.stringify(xhr));
+		});
 
-  $("p.flash-notice").delay(3000).slideUp();
+	},
+
+	setupFlash: function(){
+		$("p.flash-notice, p.flash-error").click(function() {
+		   $(this).slideUp();
+		 });
+
+	 	$("p.flash-notice").delay(3000).slideUp();
+	},
+
+	setupMainMenu: function(attribute){
+		$("#sub-apps-menu > div.bottom").click(function() {
+		$("#sub-apps-menu > ul").slideToggle("fast");
+	 });
+
+	 $("#sub-apps-menu > ul").click(function() {
+	   $(this).slideUp("fast");
+	 });	
+	}
+}
+
+jQuery(document).ready(function($) {
+	
+	Ronin.setupAjaxCallbacks();
+	Ronin.setupFlash();
+	Ronin.setupMainMenu();
+	
 });

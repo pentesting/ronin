@@ -1,3 +1,5 @@
+/* @group Main */
+
 body {
 	font-family: sans-serif,verdana,Helvetica;
 }
@@ -6,21 +8,22 @@ a {
 	text-decoration: none;
 }
 
-noscript {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	z-index: 1;
+#page {
+	margin: 150px 150px 0 150px;
+	padding: 20px;
 }
 
-div.error {
-	padding: 0.2em 1em;
-	color: white;
-	background-color: #bd0000;
-	font-weight: bold;
+#content {
+	padding: 1em;
+	background-color: white;
+	border: 10px solid #dadada;
 }
+
+
+
+/* @end */
+
+/* @group Menu */
 
 #sub-apps-menu {
 	position: absolute;
@@ -96,16 +99,38 @@ div.error {
 	font-weight: bold;
 }
 
-#page {
-	margin: 150px 150px 0 150px;
-	padding: 20px;
+
+
+/* @end */
+
+/* @group Error */
+
+div.error {
+	padding: 0.2em 1em;
+	color: white;
+	background-color: #bd0000;
+	font-weight: bold;
 }
 
-#content {
-	padding: 1em;
-	background-color: white;
-	border: 10px solid #dadada;
+noscript {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	z-index: 1;
 }
+
+div.danger {
+	padding: 0.5em;
+	border: 10px solid red;
+}
+
+
+
+/* @end */
+
+/* @group Flash */
 
 p.flash-error {
 	margin: 0.5em 0 0.5em 0;
@@ -123,7 +148,6 @@ p.flash-notice {
 	font-weight: bold;
 }
 
-div.danger {
-	padding: 0.5em;
-	border: 10px solid red;
-}
+
+
+/* @end */
