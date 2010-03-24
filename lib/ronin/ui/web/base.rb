@@ -101,7 +101,6 @@ module Ronin
 
         self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..')
 
-        set :environment, :production
         enable :methodoverride, :static, :sessions
 
         helpers Helpers::Rendering
