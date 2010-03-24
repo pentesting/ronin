@@ -1,5 +1,24 @@
 $(document).ready(function() {
   var input = $("#console-input > input");
+  var output = $("#console-output");
+
+  function outputExpression(code)
+  {
+    var code_div = $('<div class="code" />').text(code);
+
+    $('<div class="expression" />').append(
+      '<div class="prompt">&gt;&gt;</div>'
+    ).append(code_div).appendTo(output);
+  }
+
+  function outputResult(code)
+  {
+    var code_div = $('<div class="code" />').text(code.value);
+
+    $('<div class="result" />').append(
+      '<div class="prompt">=&gt;</div>'
+    ).append(code_div).appendTo(output);
+  }
 
   function inputKeyEvent(e)
   {
@@ -12,15 +31,22 @@ $(document).ready(function() {
         $.post('/console/push', {'code': code}, function(data) {
           input.val('');
 
+          outputExpression(code);
+
           $.PeriodicalUpdater('/console/pull', {
             method: 'get',
-            minTimeout: 800,
-            maxTimeout: 3000,
-            multiplier: 2,
-            type: 'json',
-          }, function(data) {
-              alert(data);
-          });
+            minTimeout: 1000,
+            maxTimeout: 10000,
+            multiplier: 2
+            }, function(data) {
+               if (data == null || data.length == 0) {
+                 $.stop();
+               }
+               else
+               {
+                 outputResult(data);
+               }
+            });
         });
       }
       else
