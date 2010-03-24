@@ -199,8 +199,7 @@ module Ronin
           end
 
           get '/console' do
-            flash[:notice] = "Console not yet implemented."
-            redirect '/'
+            erb :console
           end
 
           get '/about' do

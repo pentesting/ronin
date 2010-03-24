@@ -1,0 +1,51 @@
+#console {
+	padding: 10px;
+	background-color: black;
+}
+
+#console-output {
+	height: 25em;
+	overflow: auto;
+}
+
+#console-output > div {
+	padding: 0.5em 0;
+	font-family: monospace;
+}
+
+#console-output > div > div.prompt {
+	float: left;
+}
+
+#console-output > div > div.code {
+	margin-left: 2em;
+	white-space: pre;
+}
+
+#console-output > div.result {
+	color: white;
+	background-color: #2e2e2e;
+}
+
+#console-output > div.expression {
+	color: #dadada;
+	background-color: black;
+}
+
+#console-input {
+	margin-top: 10px;
+}
+
+#console-input > input {
+	width: 100%;
+	padding: 0.5em 0;
+	border: none;
+}
+
+#console-input > textarea {
+	display: none;
+	width: 100%;
+	height: 6em;
+	padding: 0.5em 0;
+	border: none;
+}
