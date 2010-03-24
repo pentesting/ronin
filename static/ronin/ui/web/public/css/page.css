@@ -19,7 +19,23 @@ a {
 	border: 10px solid #dadada;
 }
 
+#content table.key-value {
+	border: 2px solid #2e2e2e;
+}
 
+#content table.key-value td {
+	padding: 0.25em 1em;
+}
+
+#content table.key-value .key {
+	color: white;
+	background-color: #2e2e2e;
+	font-weight: bold;
+}
+
+#content table.key-value .value {
+	background-color: #dadada;
+}
 
 /* @end */
 
