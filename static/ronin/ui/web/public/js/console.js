@@ -21,4 +21,5 @@ $(document).ready(function() {
   }
 
   input.keypress(inputKeyEvent);
+  input.focus();
 });
