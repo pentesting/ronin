@@ -32,13 +32,10 @@
     </div>
 
     <div id="page">
-      <% if flash[:error] %>
-      <p class="flash-error"><%=h flash[:error] %></p>
+      <% flash.each do |category,message| do %>
+      <p class="flash-<%=h category %>"><%=h message %></p>
       <% end %>
-
-      <% if flash[:notice] %>
-      <p class="flash-notice"><%=h flash[:notice] %></p>
-      <% end %>
+      <% flash.clear %>
 
       <div id="content">
         <%= yield %>
