@@ -21,7 +21,6 @@
 require 'ronin/ui/web/helpers/rendering'
 
 require 'sinatra/base'
-require 'rack/flash'
 
 module Ronin
   module UI
@@ -107,6 +106,7 @@ module Ronin
         use Rack::Flash, :sweep => true
 
         helpers Helpers::Rendering
+        helpers Helpers::Session
 
         cache_template :layout, File.join('layouts','default.erb')
         cache_template '404'

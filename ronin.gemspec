@@ -115,6 +115,7 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/web/base.rb",
     "lib/ronin/ui/web/helpers.rb",
     "lib/ronin/ui/web/helpers/rendering.rb",
+    "lib/ronin/ui/web/helpers/session.rb",
     "lib/ronin/ui/web/router.rb",
     "lib/ronin/ui/web/web.rb",
     "lib/ronin/version.rb",
@@ -284,7 +285,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<thor>, [">= 0.13.0"])
       s.add_runtime_dependency(%q<thin>, [">= 1.2.5"])
       s.add_runtime_dependency(%q<rack>, [">= 1.0.0"])
-      s.add_runtime_dependency(%q<rack-flash>, [">= 0.1.1"])
       s.add_runtime_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_runtime_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
@@ -308,7 +308,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<thor>, [">= 0.13.0"])
       s.add_dependency(%q<thin>, [">= 1.2.5"])
       s.add_dependency(%q<rack>, [">= 1.0.0"])
-      s.add_dependency(%q<rack-flash>, [">= 0.1.1"])
       s.add_dependency(%q<sinatra>, [">= 0.9.4"])
       s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
@@ -333,7 +332,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<thor>, [">= 0.13.0"])
     s.add_dependency(%q<thin>, [">= 1.2.5"])
     s.add_dependency(%q<rack>, [">= 1.0.0"])
-    s.add_dependency(%q<rack-flash>, [">= 0.1.1"])
     s.add_dependency(%q<sinatra>, [">= 0.9.4"])
     s.add_dependency(%q<ronin-ext>, [">= 0.1.0"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
