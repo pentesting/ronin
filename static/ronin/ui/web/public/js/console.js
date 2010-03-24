@@ -18,6 +18,8 @@ $(document).ready(function() {
     $('<div class="result" />').append(
       '<div class="prompt">=&gt;</div>'
     ).append(code_div).appendTo(output);
+
+    output.attr('scrollTop', output.attr('scrollHeight'));
   }
 
   function inputKeyEvent(e)
