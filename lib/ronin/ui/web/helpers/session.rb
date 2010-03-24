@@ -18,6 +18,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/ui/async_console'
+
 module Ronin
   module UI
     module Web
@@ -37,6 +39,18 @@ module Ronin
             else
               session[:flash] ||= {}
             end
+          end
+
+          #
+          # The console used by this session.
+          #
+          # @return [AsyncConsole]
+          #   The asynchronous console.
+          #
+          # @since 0.4.0
+          #
+          def console(context=Ronin)
+            session[:console] ||= AsyncConsole.new(context)
           end
         end
       end
