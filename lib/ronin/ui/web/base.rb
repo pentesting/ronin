@@ -19,6 +19,7 @@
 #
 
 require 'ronin/ui/web/helpers/rendering'
+require 'ronin/ui/web/helpers/session'
 
 require 'sinatra/base'
 
