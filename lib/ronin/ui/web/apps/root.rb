@@ -227,12 +227,12 @@ module Ronin
 
           get '/console/pull' do
             if (result = Root.console.pull)
-              json [
-                result.line,
-                result.type,
-                result.value.class.name,
-                result.value
-              ]
+              json(
+                :line => result.line,
+                :type => result.type,
+                :class => result.value.class.name,
+                :value => result.value
+              )
             else
               json []
             end
