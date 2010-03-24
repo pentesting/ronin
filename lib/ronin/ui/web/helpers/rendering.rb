@@ -19,6 +19,7 @@
 #
 
 require 'rack/utils'
+require 'json'
 
 module Ronin
   module UI
