@@ -9,10 +9,14 @@ $(document).ready(function() {
 
       if (code.length > 0)
       {
-        // send code to be evaluated
+        $.post('/console/push', {'code': code}, function(data) {
+          input.val('');
+        });
       }
-
-      input.val('');
+      else
+      {
+        input.val('');
+      }
     }
   }
 
