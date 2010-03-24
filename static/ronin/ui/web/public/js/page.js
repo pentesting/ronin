@@ -1,5 +1,5 @@
 var Ronin = {	
-	setupAjaxCallbacks: function(){
+	setupAjaxCallbacks: function($){
 		$('body').ajaxStart(function () {
 			// ...
 		});
@@ -14,7 +14,7 @@ var Ronin = {
 
 	},
 
-	setupFlash: function(){
+	setupFlash: function($){
 		$("p.flash-notice, p.flash-error").click(function() {
 		   $(this).slideUp();
 		 });
@@ -22,7 +22,7 @@ var Ronin = {
 	 	$("p.flash-notice").delay(3000).slideUp();
 	},
 
-	setupMainMenu: function(attribute){
+	setupMainMenu: function($){
 		$("#sub-apps-menu > div.bottom").click(function() {
 		$("#sub-apps-menu > ul").slideToggle("fast");
 	 });
@@ -35,8 +35,8 @@ var Ronin = {
 
 jQuery(document).ready(function($) {
 	
-	Ronin.setupAjaxCallbacks();
-	Ronin.setupFlash();
-	Ronin.setupMainMenu();
+	Ronin.setupAjaxCallbacks($);
+	Ronin.setupFlash($);
+	Ronin.setupMainMenu($);
 	
 });
