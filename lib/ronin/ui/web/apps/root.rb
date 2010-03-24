@@ -20,6 +20,7 @@
 
 require 'ronin/ui/web/base'
 require 'ronin/ui/web/apps'
+require 'ronin/ui/async_console'
 require 'ronin/installation'
 require 'ronin/platform'
 require 'ronin/database'
@@ -30,6 +31,18 @@ module Ronin
     module Web
       module Apps
         class Root < Base
+
+          #
+          # The console used by the Root web application.
+          #
+          # @return [AsyncConsole]
+          #   The asynchronous console.
+          #
+          # @since 0.4.0
+          #
+          def Root.console
+            @console ||= AsyncConsole.new
+          end
 
           self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..','..')
           self.menu = {
@@ -204,12 +217,16 @@ module Ronin
 
           post '/console/push' do
             unless params[:code].blank?
-              console.push params[:code]
+              Root.console.push params[:code]
+
+              json [:pushed]
+            else
+              json [:empty]
             end
           end
 
           get '/console/pull' do
-            if (result = console.pull)
+            if (result = Root.console.pull)
               json [
                 result.line,
                 result.type,
