@@ -202,6 +202,25 @@ module Ronin
             erb :console
           end
 
+          post '/console/push' do
+            unless params[:code].blank?
+              console.push params[:code]
+            end
+          end
+
+          get '/console/pull' do
+            if (result = console.pull)
+              json [
+                result.line,
+                result.type,
+                result.value.class.name,
+                result.value
+              ]
+            else
+              json []
+            end
+          end
+
           get '/about' do
             erb :about
           end
