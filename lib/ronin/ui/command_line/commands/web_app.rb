@@ -30,11 +30,14 @@ module Ronin
           desc 'Starts the Ronin Web UI'
           class_option :host, :default => Web::DEFAULT_HOST,  :aliases => '-I'
           class_option :port, :default => Web::DEFAULT_PORT, :aliases => '-p'
+          class_option :skip_intro, :type => :boolean
 
           #
           # Starts the local Ronin Web UI.
           #
           def execute
+            Web::Apps::Root.skip_intro = options.skip_intro?
+
             Web.start(:host => options[:host], :port => options[:port])
           end
 
