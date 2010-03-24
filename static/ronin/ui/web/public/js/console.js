@@ -11,6 +11,16 @@ $(document).ready(function() {
       {
         $.post('/console/push', {'code': code}, function(data) {
           input.val('');
+
+          $.PeriodicalUpdater('/console/pull', {
+            method: 'get',
+            minTimeout: 800,
+            maxTimeout: 3000,
+            multiplier: 2,
+            type: 'json',
+          }, function(data) {
+              alert(data);
+          });
         });
       }
       else
