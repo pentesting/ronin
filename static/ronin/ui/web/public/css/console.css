@@ -8,28 +8,27 @@
 	overflow: auto;
 }
 
-#console-output > div {
-	padding: 0.5em 0;
-	font-family: monospace;
-}
-
-#console-output > div > div.prompt {
+#console-output div.prompt {
 	float: left;
 }
 
-#console-output > div > div.code {
+#console-output div.code {
 	margin-left: 2em;
 	white-space: pre;
 }
 
-#console-output > div.result {
+#console-output div.result {
+	padding: 0.5em 0;
 	color: white;
 	background-color: #2e2e2e;
+	font-family: monospace;
 }
 
-#console-output > div.expression {
+#console-output div.expression {
+	padding: 0.5em 0;
 	color: #dadada;
 	background-color: black;
+	font-family: monospace;
 }
 
 #console-input {

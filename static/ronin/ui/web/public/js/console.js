@@ -1,23 +1,29 @@
 $(document).ready(function() {
   var input = $("#console-input > input");
   var output = $("#console-output");
+  var line = 0;
 
   function outputExpression(code)
   {
+    var line_div = $('<div id="console-line-' + line + '" />');
     var code_div = $('<div class="code" />').text(code);
-
-    $('<div class="expression" />').append(
+    var expression_div = $('<div class="expression" />').append(
       '<div class="prompt">&gt;&gt;</div>'
-    ).append(code_div).appendTo(output);
+    ).append(code_div);
+
+    line_div.append(expression_div).appendTo(output);
   }
 
   function outputResult(code)
   {
-    var code_div = $('<div class="code" />').text(code.value);
+    var line_div = $('#console-line-' + code.line, output);
 
-    $('<div class="result" />').append(
+    var code_div = $('<div class="code" />').text(code.value);
+    var result_div = $('<div class="result" />').append(
       '<div class="prompt">=&gt;</div>'
-    ).append(code_div).appendTo(output);
+    ).append(code_div);
+      
+    line_div.append(result_div);
 
     output.attr('scrollTop', output.attr('scrollHeight'));
   }
@@ -31,6 +37,7 @@ $(document).ready(function() {
       if (code.length > 0)
       {
         $.post('/console/push', {'code': code}, function(data) {
+          line = data;
           input.val('');
 
           outputExpression(code);
@@ -49,7 +56,7 @@ $(document).ready(function() {
                  outputResult(data);
                }
             });
-        });
+        }, 'json');
       }
       else
       {
