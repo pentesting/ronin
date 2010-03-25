@@ -25,7 +25,7 @@ module Ronin
     class AsyncConsole
 
       # The result message class
-      Message = Struct.new(:line, :type, :value)
+      Result = Struct.new(:line, :type, :value)
 
       #
       # Creates a new Asynchronous Console, within the given context.
@@ -56,9 +56,9 @@ module Ronin
                          eval(code,scope)
                        end
 
-              mesg = Message.new(line, :result, result)
+              mesg = Result.new(line, :result, result)
             rescue Exception => e
-              mesg = Message.new(line, :exception, e)
+              mesg = Result.new(line, :exception, e)
             end
 
             @output.push mesg
@@ -96,7 +96,7 @@ module Ronin
       #
       # Dequeues a result.
       #
-      # @return [Message]
+      # @return [Result]
       #   The result message.
       #
       def pull
@@ -109,7 +109,7 @@ module Ronin
       # @yield [message]
       #   The given block will be passed each result.
       #
-      # @yieldparam [Message] message
+      # @yieldparam [Result] message
       #   A result message returned from a previous evaluation.
       #
       def each(&block)
