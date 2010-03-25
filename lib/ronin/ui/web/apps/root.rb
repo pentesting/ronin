@@ -217,11 +217,9 @@ module Ronin
 
           post '/console/push' do
             unless params[:code].blank?
-              Root.console.push params[:code]
-
-              json [:pushed]
+              json Root.console.push(params[:code])
             else
-              json [:empty]
+              json []
             end
           end
 
