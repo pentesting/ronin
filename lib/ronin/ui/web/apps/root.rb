@@ -193,7 +193,7 @@ module Ronin
 
             overlay = Platform::Overlay.install!(params[:overlay])
 
-            flash[:notice] = "Overlay #{overaly} was successfilly installed."
+            flash[:notice] = "Overlay #{overlay} was successfilly installed."
             redirect '/overlays'
           end
 
