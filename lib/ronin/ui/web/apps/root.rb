@@ -111,12 +111,32 @@ module Ronin
             redirect '/database'
           end
 
-          post '/database/:name/set' do
-            Database.save do
-              Database.repositories[name] = params[:uri]
+          get '/database/:name/edit' do
+            @name = params[:name].to_sym
+            @repository = Database.repositories[@name]
+
+            erb :database_edit
+          end
+
+          post '/database/set' do
+            if params[:name].blank?
+              flash[:error] = "No Database Repository name given."
+              redirect '/database'
             end
 
-            flash[:notice] = "Database repository #{params[:name]} was set to #{params[:uri]}."
+            if params[:uri].blank?
+              flash[:error] = "No Database Repository URI given."
+              redirect '/database'
+            end
+
+            name = params[:name].to_sym
+            uri = Addressable::URI.new(params[:uri])
+
+            Database.save do
+              Database.repositories[name] = uri
+            end
+
+            flash[:notice] = "Database repository #{name} was set to #{uri}."
             redirect '/database'
           end
 
