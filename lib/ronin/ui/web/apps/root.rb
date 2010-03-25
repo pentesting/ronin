@@ -228,7 +228,7 @@ module Ronin
               json(
                 :line => result.line,
                 :type => result.type,
-                :class => result.value.class.name,
+                :class_name => result.value.class.name,
                 :value => result.value.inspect
               )
             else
