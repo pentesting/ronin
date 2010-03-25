@@ -75,12 +75,12 @@ module Ronin
       # @yield []
       #   If a block is given, it will be evaluated.
       #
-      # @return [AsyncConsole]
-      #   The Asynchronous Console.
+      # @return [Integer]
+      #   The line number assigned to the pushed code.
       #
       def push(code=nil,&block)
         @input.push [@line += 1, (code || block)]
-        return self
+        return @line
       end
 
       #
