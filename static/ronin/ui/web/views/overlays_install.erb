@@ -4,13 +4,13 @@
 
 <form action="/overlays/install" method="post">
   <div>
-    <label for="uri"><span class="optional">*</span> URI:</label>
-    <input name="uri" type="text" />
+    <label for="overlay[uri]"><span class="optional">*</span> URI:</label>
+    <input name="overlay[uri]" type="text" />
   </div>
 
   <div>
-    <label for="scm"><span class="optional">*</span> SCM:</label>
-    <select name="scm">
+    <label for="overlay[scm]"><span class="optional">*</span> SCM:</label>
+    <select name="overlay[scm]">
       <option></option>
       <option value="git">Git</option>
       <option value="mercurial">Mercurial (Hg)</option>

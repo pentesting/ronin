@@ -170,16 +170,12 @@ module Ronin
           end
 
           post '/overlays/add' do
-            if params[:path].blank?
+            if params[:overlay][:path].blank?
               flash[:error] = "Must specify a path to add."
               redirect '/overlays/add'
             end
 
-            overlay = Platform::Overlay.add!(
-              :path => params[:path],
-              :uri => params[:uri],
-              :scm => params[:scm]
-            )
+            overlay = Platform::Overlay.add!(params[:overlay])
 
             flash[:notice] = "Overlay #{overlay} was successfully added."
             redirect '/overlays'
@@ -190,15 +186,12 @@ module Ronin
           end
 
           post '/overlays/install' do
-            if params[:uri].blank?
+            if params[:overlay][:uri].blank?
               flash[:error] = "Must specify a URI to install from."
               redirect '/overlays/add'
             end
 
-            overlay = Platform::Overlay.install!(
-              :uri => params[:uri],
-              :scm => params[:scm]
-            )
+            overlay = Platform::Overlay.install!(params[:overlay])
 
             flash[:notice] = "Overlay #{overaly} was successfilly installed."
             redirect '/overlays'
