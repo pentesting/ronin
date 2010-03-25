@@ -17,6 +17,10 @@
 	white-space: pre;
 }
 
+#console-output div.code > span.line-number {
+	float: right;
+}
+
 #console-output div.result {
 	padding: 0.5em 0;
 	color: white;

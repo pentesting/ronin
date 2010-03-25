@@ -5,11 +5,20 @@ $(document).ready(function() {
 
   function outputExpression(code)
   {
+    var line_number = $('<span class="line-number" />').text(line);
+
+    line_number.hide();
+
     var line_div = $('<div id="console-line-' + line + '" />');
     var code_div = $('<div class="code" />').text(code);
     var expression_div = $('<div class="expression" />').append(
       '<div class="prompt">&gt;&gt;</div>'
-    ).append(code_div);
+    ).append(code_div).append(line_number);
+
+    expression_div.hover(
+      function() { $("span.line-number",this).show(); },
+      function() { $("span.line-number",this).hide(); }
+    );
 
     line_div.append(expression_div).appendTo(output);
   }
