@@ -225,12 +225,18 @@ module Ronin
 
           get '/console/pull' do
             if (result = Root.console.pull)
-              json(
+              hash = {
                 :line => result.line,
                 :type => result.type,
                 :class_name => result.value.class.name,
                 :value => result.value.inspect
-              )
+              }
+
+              if result.type == :exception
+                hash[:backtrace] = result.value.backtrace
+              end
+
+              json hash
             else
               json []
             end

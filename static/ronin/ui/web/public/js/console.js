@@ -26,8 +26,35 @@ $(document).ready(function() {
   function outputResult(code)
   {
     var line_div = $('#console-line-' + code.line, output);
+    var code_div = $('<div class="code" />');
 
-    var code_div = $('<div class="code" />').text(code.value);
+    if (code.type == 'object')
+    {
+      $('<a target="new" />').attr({
+        href: '/docs/' + code.class_name
+      }).text(code.value).appendTo(code_div);
+    }
+    else if (code.type == 'exception')
+    {
+      var backtrace_link = $('<a class="backtrace-link" />').text(code.value);
+
+      backtrace_link.click(function() {
+        $(this).next().toggle();
+      });
+      
+      backtrace_link.appendTo(code_div);
+
+      var backtrace_div = $('<div class="backtrace" />');
+      var i;
+
+      for (i=0;i<code.backtrace.length;i++)
+      {
+        $('<p>').text(code.backtrace[i]).appendTo(backtrace_div);
+      }
+
+      backtrace_div.appendTo(code_div);
+    }
+
     var result_div = $('<div class="result" />').append(
       '<div class="prompt">=&gt;</div>'
     ).append(code_div);

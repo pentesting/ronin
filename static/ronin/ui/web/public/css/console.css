@@ -17,21 +17,38 @@
 	white-space: pre;
 }
 
+#console-output div.code > a {
+	color: white;
+	text-decoration: none;
+}
+
+#console-output div.code > a:hover {
+	text-decoration: underline;
+}
+
 #console-output div.code > span.line-number {
 	float: right;
 }
 
-#console-output div.result {
-	padding: 0.5em 0;
-	color: white;
-	background-color: #2e2e2e;
-	font-family: monospace;
+#console-output div.code > div.backtrace {
+	display: none;
+}
+
+#console-output div.code > div.backtrace > p {
+	margin: 0.5em;
 }
 
 #console-output div.expression {
 	padding: 0.5em 0;
 	color: #dadada;
 	background-color: black;
+	font-family: monospace;
+}
+
+#console-output div.result {
+	padding: 0.5em 0;
+	color: white;
+	background-color: #2e2e2e;
 	font-family: monospace;
 }
 
