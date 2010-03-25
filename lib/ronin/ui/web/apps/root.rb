@@ -228,9 +228,15 @@ module Ronin
               hash = {
                 :line => result.line,
                 :type => result.type,
-                :class_name => result.value.class.name,
                 :value => result.value.inspect
               }
+
+              hash[:class_name] = case result.value.class
+                                  when Class, Module
+                                    result.value.name
+                                  else
+                                    result.value.class.name
+                                  end
 
               if result.type == :exception
                 hash[:backtrace] = result.value.backtrace
