@@ -56,7 +56,7 @@ module Ronin
                          eval(code,scope)
                        end
 
-              mesg = Result.new(line, :result, result)
+              mesg = Result.new(line, :object, result)
             rescue Exception => e
               mesg = Result.new(line, :exception, e)
             end
