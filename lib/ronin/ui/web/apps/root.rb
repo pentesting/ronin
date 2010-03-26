@@ -130,7 +130,7 @@ module Ronin
             end
 
             name = params[:name].to_sym
-            uri = Addressable::URI.new(params[:uri])
+            uri = Addressable::URI.new(options(:uri))
 
             Database.save do
               Database.repositories[name] = uri
@@ -175,7 +175,7 @@ module Ronin
               redirect '/overlays/add'
             end
 
-            overlay = Platform::Overlay.add!(params[:overlay])
+            overlay = Platform::Overlay.add!(options(:overlay))
 
             flash[:notice] = "Overlay #{overlay} was successfully added."
             redirect '/overlays'
@@ -191,7 +191,7 @@ module Ronin
               redirect '/overlays/add'
             end
 
-            overlay = Platform::Overlay.install!(params[:overlay])
+            overlay = Platform::Overlay.install!(options(:overlay))
 
             flash[:notice] = "Overlay #{overlay} was successfilly installed."
             redirect '/overlays'
