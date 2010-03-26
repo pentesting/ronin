@@ -86,8 +86,8 @@ module Ronin
             erb :database
           end
 
-          get '/database/new' do
-            erb :database_new
+          get '/database/add' do
+            erb :database_add
           end
 
           post '/database/add' do
@@ -102,12 +102,13 @@ module Ronin
             end
 
             name = params[:name].to_sym
+            uri = Addressable::URI.new(options(:uri))
 
             Database.save do
-              Database.repositories[name] = params[:uri]
+              Database.repositories[name] = uri
             end
 
-            flash[:notice] = "Database repository #{params[:name]} added."
+            flash[:notice] = "Database repository #{name} added."
             redirect '/database'
           end
 
