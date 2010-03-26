@@ -19,6 +19,7 @@
 #
 
 require 'ronin/ui/web/helpers/rendering'
+require 'ronin/ui/web/helpers/params'
 require 'ronin/ui/web/helpers/session'
 
 require 'sinatra/base'
@@ -104,6 +105,7 @@ module Ronin
         enable :methodoverride, :static, :sessions
 
         helpers Helpers::Rendering
+        helpers Helpers::Params
         helpers Helpers::Session
 
         cache_template :layout, File.join('layouts','default.erb')
