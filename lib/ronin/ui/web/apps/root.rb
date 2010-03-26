@@ -251,11 +251,14 @@ module Ronin
                 :value => result.value.inspect
               }
 
-              hash[:class_name] = case result.value.class
-                                  when Class, Module
-                                    result.value.name
+              value = result.value
+
+              hash[:class_name] = if value.instance_of?(Class)
+                                    value.name
+                                  elsif value.instance_of?(Module)
+                                    value.name
                                   else
-                                    result.value.class.name
+                                    value.class.name
                                   end
 
               if result.type == :exception
