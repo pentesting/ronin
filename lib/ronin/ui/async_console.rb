@@ -33,17 +33,22 @@ module Ronin
       # @param [Module] context
       #   The context to evaluate code within.
       #
-      def initialize(context=Ronin)
+      # @yield []
+      #   If a block is given, it will be instance evaled within the
+      #   sandbox object.
+      #
+      def initialize(context=Ronin,&block)
         @context = context
         @line = 0
 
         @input = Queue.new
         @output = Queue.new
 
-        Thread.new(@context) do |context|
-          sandbox = Object.new
-          sandbox.extend context
+        sandbox = Object.new
+        sandbox.extend context
+        sandbox.instance_eval(&block) if block
 
+        Thread.new(sandbox) do |sandbox|
           scope = sandbox.send :binding
 
           loop do
