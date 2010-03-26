@@ -141,6 +141,12 @@ module Ronin
             redirect '/database'
           end
 
+          get '/database/:name/remove' do
+            @name = params[:name].to_sym
+
+            erb :database_remove
+          end
+
           post '/database/:name/remove' do
             name = params[:name].to_sym
 
