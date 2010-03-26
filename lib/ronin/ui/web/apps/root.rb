@@ -41,7 +41,9 @@ module Ronin
           # @since 0.4.0
           #
           def Root.console
-            @console ||= AsyncConsole.new
+            @console ||= AsyncConsole.new do
+              require 'ronin/environment'
+            end
           end
 
           self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..','..')
