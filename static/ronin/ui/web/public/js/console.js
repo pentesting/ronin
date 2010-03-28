@@ -1,7 +1,45 @@
 $(document).ready(function() {
   var input = $("#console-input > input");
   var output = $("#console-output");
+  var pending_lines = [];
   var current_line = 0;
+
+  function dequeueLine(line) {
+    var i = pending_lines.indexOf(line);
+
+    if (i != -1)
+    {
+      pending_lines.splice(i, 1);
+    }
+  }
+
+  function enqueueLine(line) {
+    pending_lines.push(line);
+
+    if (pending_lines.length == 1)
+    {
+      $.PeriodicalUpdater('/console/pull', {
+          method: 'get',
+          minTimeout: 1000,
+          maxTimeout: 10000,
+          multiplier: 2
+        },
+        
+        function(result) {
+          if (result != null)
+          {
+            dequeueLine(result.line);
+            outputResult(result);
+
+            if (pending_lines.length == 0)
+            {
+              $.stop();
+            }
+          }
+        }
+      );
+    }
+  }
 
   function outputExpression(code)
   {
@@ -77,23 +115,7 @@ $(document).ready(function() {
           input.val('');
 
           outputExpression(code);
-
-          $.PeriodicalUpdater('/console/pull', {
-            method: 'get',
-            minTimeout: 1000,
-            maxTimeout: 10000,
-            multiplier: 2
-            }, function(result) {
-               if (result != null)
-               {
-                 outputResult(result);
-
-                 if (result.line == pending_line)
-                 {
-                   $.stop();
-                 }
-               }
-            });
+          enqueueLine(pending_line);
         }, 'json');
       }
       else
