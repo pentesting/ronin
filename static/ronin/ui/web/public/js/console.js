@@ -1,15 +1,15 @@
 $(document).ready(function() {
   var input = $("#console-input > input");
   var output = $("#console-output");
-  var line = 0;
+  var current_line = 0;
 
   function outputExpression(code)
   {
-    var line_number = $('<span class="line-number" />').text(line);
+    var line_number = $('<span class="line-number" />').text(current_line);
 
     line_number.hide();
 
-    var line_div = $('<div id="console-line-' + line + '" />');
+    var line_div = $('<div id="console-line-' + current_line + '" />');
     var code_div = $('<div class="code" />').text(code);
     var expression_div = $('<div class="expression" />').append(
       '<div class="prompt">&gt;&gt;</div>'
@@ -72,8 +72,8 @@ $(document).ready(function() {
 
       if (code.length > 0)
       {
-        $.post('/console/push', {'code': code}, function(data) {
-          line = data;
+        $.post('/console/push', {'code': code}, function(pending_line) {
+          current_line = pending_line;
           input.val('');
 
           outputExpression(code);
@@ -83,13 +83,15 @@ $(document).ready(function() {
             minTimeout: 1000,
             maxTimeout: 10000,
             multiplier: 2
-            }, function(data) {
-               if (data == null || data.length == 0) {
-                 $.stop();
-               }
-               else
+            }, function(result) {
+               if (result != null)
                {
-                 outputResult(data);
+                 outputResult(result);
+
+                 if (result.line == pending_line)
+                 {
+                   $.stop();
+                 }
                }
             });
         }, 'json');
