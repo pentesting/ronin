@@ -47,6 +47,11 @@ begin
 
       $ ronin
 
+    To start up the local Ronin Web UI, run the follwoing command and
+    go to http://localhost:3030/:
+
+      $ ronin webapp
+
     Additional functionality can be added to Ronin by installing additional
     libraries:
     * ronin-asm
