@@ -50,7 +50,8 @@ module Ronin
           self.menu = {
             'Database' => '/database',
             'Overlays' => '/overlays',
-            'About' => '/about'
+            'About' => '/about',
+            'Console' => '/console'
           }
 
           set :intro, false
