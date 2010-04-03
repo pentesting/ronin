@@ -66,6 +66,34 @@ module Ronin
       end
 
       #
+      # The environment to run the Web UI under.
+      #
+      # @return [Symbol]
+      #   The environment name, may be either `:production`, `:development`
+      #   or `:test`.
+      #
+      # @since 0.4.0
+      #
+      def Web.environment
+        Base.environment
+      end
+
+      #
+      # Sets the environment to run the Web UI under.
+      #
+      # @param [Symbol] new_env
+      #   The new environment to use.
+      #
+      # @return [Symbol]
+      #   The environment to run the Web UI under.
+      #
+      # @since 0.4.0
+      #
+      def Web.environment=(new_env)
+        Base.environment = new_env.to_sym
+      end
+
+      #
       # Returns a Rack compatible app for the Ronin Web UI.
       #
       # @return [Router]
