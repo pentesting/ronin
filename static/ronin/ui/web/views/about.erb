@@ -7,6 +7,8 @@
 <p><strong>Sinatra:</strong> <%=h Sinatra::VERSION %></p>
 <p><strong>Ronin:</strong> <%=h Ronin::VERSION %></p>
 
+<p><strong>Environment:</strong> <%=h Ronin::UI::Web.environment %></p>
+
 <% unless Ronin::Installation.gems.empty? %>
 <h2>Ronin Libraries</h2>
 
