@@ -1,0 +1,28 @@
+<h1>Add Overlay</h1>
+
+<p>Add a local Overlay to Ronin:</p>
+
+<form action="/overlays/add" method="post">
+  <div>
+    <label for="overlay[path]">Path:</label>
+    <input name="overlay[path]" type="text" />
+  </div>
+
+  <div>
+    <label for="overlay[uri]"><span class="optional">*</span> URI:</label>
+    <input name="overlay[uri]" type="text" />
+  </div>
+
+  <div>
+    <label for="overlay[scm]"><span class="optional">*</span> SCM:</label>
+    <select name="overlay[scm]">
+      <option></option>
+      <option value="git">Git</option>
+      <option value="mercurial">Mercurial (Hg)</option>
+      <option value="sub_version">SubVersion (SVN)</option>
+      <option value="rsync">Rsync</option>
+    </select>
+  </div>
+
+  <input type="submit" value="Add" />
+</form>

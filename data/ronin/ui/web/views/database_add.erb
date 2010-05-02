@@ -1,0 +1,56 @@
+<h1>Add Database Repository</h1>
+
+<p>Add a new Repository to the Database.</p>
+
+<form action="/database/set" method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="" />
+  </div>
+
+  <div>
+    <label for="uri[scheme]">Type:</label>
+    <select name="uri[scheme]">
+      <option value="sqlite3">SQLite3</option>
+      <option value="mysql">MySQL</option>
+      <option value="postgres">PostGres</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="uri[host]">Host:</label>
+    <input type="text" name="uri[host]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[port]">Port:</label>
+    <input type="text" name="uri[port]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[user]">User:</label>
+    <input type="text" name="uri[user]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[password]">Password:</label>
+    <input type="text" name="uri[password]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[user]">User:</label>
+    <input type="text" name="uri[user]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[password]">Password:</label>
+    <input type="text" name="uri[password]" value="" />
+  </div>
+
+  <div>
+    <label for="uri[path]">Path:</label>
+    <input type="text" name="uri[path]" value="" />
+  </div>
+
+  <input type="submit" value="Set" />
+</form>

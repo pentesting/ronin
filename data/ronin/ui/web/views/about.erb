@@ -1,0 +1,65 @@
+<h1>About</h1>
+
+<p><strong>Ruby:</strong> <%=h RUBY_DESCRIPTION %></p>
+<p><strong>RubyGems:</strong> <%=h Gem::VERSION %></p>
+<p><strong>DataMapper:</strong> <%=h DataMapper::VERSION %></p>
+<p><strong>Rack:</strong> <%=h Rack::VERSION.join('.') %></p>
+<p><strong>Sinatra:</strong> <%=h Sinatra::VERSION %></p>
+<p><strong>Ronin:</strong> <%=h Ronin::VERSION %></p>
+
+<p><strong>Environment:</strong> <%=h Ronin::UI::Web.environment %></p>
+
+<% unless Ronin::Installation.gems.empty? %>
+<h2>Ronin Libraries</h2>
+
+<%   Ronin::Installation.gems.each do |name,gem| %>
+<div class="gem">
+  <h3><%=h name %></h3>
+
+  <p><strong>Version:</strong> <%=h gem.version %></p>
+  <p><a href="<%=h gem.homepage %>">Homepage</a></p>
+
+  <% if gem.license %>
+  <p><strong>License:</strong> <%=h gem.license %></p>
+  <% end %>
+
+  <% if gem.author %>
+    <% if gem.email %>
+      <p>
+        <strong>Author:</strong>
+        <a href="mailto:<%=h gem.email %>"><%=h gem.author %></a>
+      </p>
+    <% else %>
+      <p><%=h gem.author %></p>
+    <% end %>
+  <% end %>
+
+  <h4>Description:</h4>
+
+  <blockquote>
+    <%=h gem.description %>
+  </blockquote>
+
+  <% unless gem.executables.empty? %>
+  <h4>Executables</h4>
+
+  <ul class="executables">
+    <% gem.executables.each do |name| %>
+    <li><%=h name %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
+<%   end %>
+<% end %>
+
+<% unless Ronin::UI::Web.apps.empty? %>
+<h2>Available Web Applications</h2>
+
+<ul>
+<%   Ronin::UI::Web.apps.each do |name| %>
+  <li><a href="/<%=h name %>"><%=h name %></a></li>
+<%   end %>
+</ul>
+
+<% end %>

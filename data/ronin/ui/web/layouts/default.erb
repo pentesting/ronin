@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Ronin Web UI</title>
+    <link rel="stylesheet" type="text/css" href="/css/page.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/json2.js"></script>
+    <script type="text/javascript" src="/js/page.js"></script>
+  </head>
+
+  <body>
+    <div id="sub-apps-menu">
+      <ul class="apps">
+        <li><a href="/">ronin</a></li>
+        <% Ronin::UI::Web.apps.each do |name| %>
+        <li><a href="/<%=h name %>"><%=h name %></a></li>
+        <% end %>
+      </ul>
+      <div class="bottom">
+        <p class="title">menu</p>
+      </div>
+    </div>
+
+    <div id="app-menu">
+      <div class="left"></div>
+      <div class="links">
+        <% self.menu.each do |name,path| %>
+        <a href="<%=h path %>"><%=h name %></a>
+        <% end %>
+      </div>
+      <div class="right"></div>
+    </div>
+
+    <div id="page">
+      <% flash.each do |category,message| %>
+      <p class="flash-<%=h category %>"><%=h message %></p>
+      <% end %>
+      <% flash.clear %>
+
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+
+    <noscript>
+      <div class="error">
+        <p>The Ronin Web UI requires JavaScript be enabled.</p>
+      </div>
+    </noscript>
+  </body>
+</html>

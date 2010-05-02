@@ -1,0 +1,59 @@
+<h1>Overlay</h1>
+
+<h2><%= @overlay %></h2>
+
+<ul>
+  <li><strong>Name:</strong> <%=h @overlay.name %></li>
+  <li><strong>Domain:</strong> <%=h @overlay.domain %></li>
+
+  <% if @overlay.scm %>
+    <li><strong>SCM:</strong> <%=h @overlay.scm %></li>
+  <% end %>
+
+  <% if @overlay.uri %>
+    <li><strong>URI:</strong> <kbd><%=h @overlay.uri %></kbd></li>
+  <% end %>
+
+  <% unless @overlay.installed? %>
+    <li>
+      <strong>Path:</strong>
+      <a href="file://<%=h @overlay.path %>/"><%=h @overlay.path %></a>
+    </li>
+  <% end %>
+
+  <% if @overlay.source %>
+    <li><a href="<%=h @overlay.source %>">Source</a></li>
+  <% end %>
+
+  <% if @overlay.website %>
+    <li><a href="<%=h @overlay.website %>">Website</a></li>
+  <% end %>
+
+  <% unless @overlay.maintainers.empty? %>
+    <li>
+      <strong>Maintainers:</strong>
+      <ul>
+      <% @overlay.maintainers.each do |maintainer| %>
+        <% if maintainer.email %>
+          <li>
+            <a href="mailto:<%=h maintainer.email %>">
+              <%=h maintainer.name %>
+            </a>
+          </li>
+        <% else %>
+          <li><kbd><%=h maintainer.name %></kbd></li>
+        <% end %>
+      <% end %>
+      </ul>
+    </li>
+
+    <% if @overlay.description %>
+    <li>
+      <strong>Description:</strong>
+      <blockquote>
+        <%=h @overlay.description %>
+      </blockquote>
+    </li>
+    <% end %>
+  <% end %>
+</ul>

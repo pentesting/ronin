@@ -1,0 +1,14 @@
+<h1>Database Remove Repository</h1>
+
+<div class="danger">
+  <p>
+  Are you sure you want to remove the Database Repository
+  <kbd><%=h @name %></kbd>?
+  </p>
+
+  <form action="/database/remove" method="post">
+    <input type="hidden" name="name" value="<%=h @name %>" />
+
+    <input type="submit" value="Remove" />
+  </form>
+</div>
