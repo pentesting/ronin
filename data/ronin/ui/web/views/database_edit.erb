@@ -1,0 +1,53 @@
+<h1>Edit Database Repository</h1>
+
+<p>Edit the location of an existing Database Repository.</a>
+
+<form action="/database/set" method="post">
+  <input type="hidden" name="name" value="<%=h @name %>" />
+
+  <div>
+    <label for="uri[scheme]">Type:</label>
+    <select name="uri[scheme]">
+      <option value="sqlite3">SQLite3</option>
+      <option value="mysql">MySQL</option>
+      <option value="postgres">PostGres</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="uri[host]">Host:</label>
+    <input type="text" name="uri[host]" value="<%=h @repository.host %>" />
+  </div>
+
+  <div>
+    <label for="uri[port]">Port:</label>
+    <input type="text" name="uri[port]" value="<%=h @repository.port %>" />
+  </div>
+
+  <div>
+    <label for="uri[user]">User:</label>
+    <input type="text" name="uri[user]" value="<%=h @repository.user %>" />
+  </div>
+
+  <div>
+    <label for="uri[password]">Password:</label>
+    <input type="text" name="uri[password]" value="<%=h @repository.password %>" />
+  </div>
+
+  <div>
+    <label for="uri[user]">User:</label>
+    <input type="text" name="uri[user]" value="<%=h @repository.user %>" />
+  </div>
+
+  <div>
+    <label for="uri[password]">Password:</label>
+    <input type="text" name="uri[password]" value="<%=h @repository.password %>" />
+  </div>
+
+  <div>
+    <label for="uri[path]">Path:</label>
+    <input type="text" name="uri[path]" value="<%=h @repository.path %>" />
+  </div>
+
+  <input type="submit" value="Set" />
+</form>

@@ -1,0 +1,18 @@
+<h1>Database Repositories</h1>
+
+<% if @repositories.empty? %>
+<p class="error">No Database repositories defined.</p>
+<% else %>
+<table border="0" cellspacing="0" cellpadding="0">
+<%   @repositories.each do |name,uri| %>
+  <tr>
+    <td><%=h name %></td>
+    <td><%=h uri %></td>
+    <td><a href="/database/<%=h name %>/edit">Edit</a></td>
+    <td><a href="/database/<%=h name %>/remove">Remove</a></td>
+  </tr>
+<%   end %>
+</table>
+<% end %>
+
+<p><a href="/database/add">Add</a></p>

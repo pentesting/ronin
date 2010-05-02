@@ -1,0 +1,34 @@
+<h1>Overlays</h1>
+
+<p>Installed Overlays:</p>
+
+<% @overlays.each do |overlay| %>
+<div>
+  <p>
+    <a href="/overlays/<%=h overlay.name %>/<%=h overlay.domain %>">
+      <%= overlay %>
+    </a>
+  </p>
+
+  <% if overlay.scm %>
+  <p>
+    <strong>SCM:</strong>
+    <kbd><%=h overlay.scm %></kbd>
+  </p>
+  <% end %>
+
+  <% if overlay.uri %>
+  <p>
+    <strong>URI:</strong>
+    <kbd><%=h overlay.uri %></kbd>
+  </p>
+  <% end %>
+
+  <% unless overlay.installed? %>
+  <p>
+    <strong>Path:</strong>
+    <a href="file://<%=h overlay.path %>/"><%=h overlay.path %></a>
+  </p>
+  <% end %>
+</div>
+<% end %>

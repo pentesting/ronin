@@ -1,0 +1,7 @@
+<h1><%=h options[:title] %></h1>
+
+<p><%=h @error.message %></p>
+
+<h2>Backtrace</h2>
+
+<pre><%= @error.backtrace.join("\n") %></pre>
