@@ -21,6 +21,7 @@
 require 'ronin/ui/web/helpers/rendering'
 require 'ronin/ui/web/helpers/params'
 require 'ronin/ui/web/helpers/session'
+require 'ronin/config'
 
 require 'sinatra/base'
 
@@ -28,18 +29,27 @@ module Ronin
   module UI
     module Web
       class App < Sinatra::Base
+
+        extend DataPaths::Finders
         
-        DATA_DIR = File.join('data','ronin','ui','web')
+        # The data directory the for Web UI
+        WEB_DIR = File.join('ronin','ui','web')
+
+        # The data directory for individual Web UI apps
+        APPS_DIR = File.join(WEB_DIR,'apps')
 
         #
-        # Sets the root of the Web application, relative to the root
-        # of the library.
+        # Configures the new Web UI app.
         #
-        # @param [String] lib_root
-        #   The root of the library.
+        # @param [Class] subclass
+        #   The class which is inheriting from the {App} class.
         #
-        def self.lib_root=(lib_root)
-          set :root, File.expand_path(File.join(lib_root,DATA_DIR))
+        def self.inherited(subclass)
+          super(subclass)
+
+          app_name = subclass.name.split('::').last.downcase
+          app_dir = File.join(APPS_DIR,app_name)
+          subclass.set :root, find_data_dir(app_dir)
         end
 
         #
@@ -101,8 +111,7 @@ module Ronin
           self.class.menu
         end
 
-        self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..')
-
+        set :root, find_data_dir(WEB_DIR)
         enable :methodoverride, :static, :sessions
 
         helpers Helpers::Rendering

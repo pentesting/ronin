@@ -46,7 +46,6 @@ module Ronin
             end
           end
 
-          self.lib_root = File.join(File.dirname(__FILE__),'..','..','..','..','..')
           self.menu = {
             'Database' => '/database',
             'Overlays' => '/overlays',
