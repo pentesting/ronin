@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.date = %q{2010-05-08}
   s.description = %q{Ronin is a Ruby platform for exploit development and security research. Ronin allows for the rapid development and distribution of code, exploits or payloads over many common Source-Code-Management (SCM) systems.}
   s.email = %q{postmodern.mod3@gmail.com}
-  s.executables = ["ronin-console", "ronin-update", "ronin-uninstall", "ronin-add", "ronin", "ronin-list", "ronin-install", "ronin-database", "ronin-help"]
+  s.executables = ["ronin-console", "ronin-update", "ronin-uninstall", "ronin-add", "ronin", "ronin-list", "ronin-install", "ronin-database", "ronin-web-ui", "ronin-help"]
   s.extra_rdoc_files = [
     "ChangeLog.md",
     "README.md"
@@ -35,7 +35,39 @@ Gem::Specification.new do |s|
     "bin/ronin-list",
     "bin/ronin-uninstall",
     "bin/ronin-update",
+    "bin/ronin-web-ui",
+    "config.ru",
     "data/ronin/platform/overlay.xsl",
+    "data/ronin/ui/web/apps/root/public/css/blueprint/ie.css",
+    "data/ronin/ui/web/apps/root/public/css/blueprint/print.css",
+    "data/ronin/ui/web/apps/root/public/css/blueprint/screen.css",
+    "data/ronin/ui/web/apps/root/public/css/console.css",
+    "data/ronin/ui/web/apps/root/public/css/page.css",
+    "data/ronin/ui/web/apps/root/public/images/diamond.png",
+    "data/ronin/ui/web/apps/root/public/images/logo.png",
+    "data/ronin/ui/web/apps/root/public/js/console.js",
+    "data/ronin/ui/web/apps/root/public/js/jquery.min.js",
+    "data/ronin/ui/web/apps/root/public/js/jquery.periodicalupdater.js",
+    "data/ronin/ui/web/apps/root/public/js/json2.js",
+    "data/ronin/ui/web/apps/root/public/js/page.js",
+    "data/ronin/ui/web/apps/root/public/js/raphael.min.js",
+    "data/ronin/ui/web/apps/root/views/about.erb",
+    "data/ronin/ui/web/apps/root/views/console.erb",
+    "data/ronin/ui/web/apps/root/views/database.erb",
+    "data/ronin/ui/web/apps/root/views/database_add.erb",
+    "data/ronin/ui/web/apps/root/views/database_edit.erb",
+    "data/ronin/ui/web/apps/root/views/database_remove.erb",
+    "data/ronin/ui/web/apps/root/views/docs_not_found.erb",
+    "data/ronin/ui/web/apps/root/views/index.erb",
+    "data/ronin/ui/web/apps/root/views/intro.erb",
+    "data/ronin/ui/web/apps/root/views/overlay.erb",
+    "data/ronin/ui/web/apps/root/views/overlays.erb",
+    "data/ronin/ui/web/apps/root/views/overlays_add.erb",
+    "data/ronin/ui/web/apps/root/views/overlays_install.erb",
+    "data/ronin/ui/web/apps/root/views/overlays_uninstall.erb",
+    "data/ronin/ui/web/layouts/default.erb",
+    "data/ronin/ui/web/views/404.erb",
+    "data/ronin/ui/web/views/error.erb",
     "lib/ronin.rb",
     "lib/ronin/address.rb",
     "lib/ronin/arch.rb",
@@ -126,6 +158,7 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/command_line/commands/list.rb",
     "lib/ronin/ui/command_line/commands/uninstall.rb",
     "lib/ronin/ui/command_line/commands/update.rb",
+    "lib/ronin/ui/command_line/commands/web_ui.rb",
     "lib/ronin/ui/command_line/exceptions.rb",
     "lib/ronin/ui/command_line/exceptions/unknown_command.rb",
     "lib/ronin/ui/console.rb",
@@ -139,6 +172,16 @@ Gem::Specification.new do |s|
     "lib/ronin/ui/output/helpers.rb",
     "lib/ronin/ui/output/output.rb",
     "lib/ronin/ui/shell.rb",
+    "lib/ronin/ui/web.rb",
+    "lib/ronin/ui/web/app.rb",
+    "lib/ronin/ui/web/apps.rb",
+    "lib/ronin/ui/web/apps/root.rb",
+    "lib/ronin/ui/web/helpers.rb",
+    "lib/ronin/ui/web/helpers/params.rb",
+    "lib/ronin/ui/web/helpers/rendering.rb",
+    "lib/ronin/ui/web/helpers/session.rb",
+    "lib/ronin/ui/web/router.rb",
+    "lib/ronin/ui/web/web.rb",
     "lib/ronin/url.rb",
     "lib/ronin/version.rb",
     "ronin.gemspec",
@@ -304,6 +347,9 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<contextify>, ["~> 0.1.5"])
       s.add_runtime_dependency(%q<pullr>, ["~> 0.1.2"])
       s.add_runtime_dependency(%q<thor>, ["~> 0.13.0"])
+      s.add_runtime_dependency(%q<thin>, ["~> 1.2.5"])
+      s.add_runtime_dependency(%q<rack>, ["~> 1.1.0"])
+      s.add_runtime_dependency(%q<sinatra>, ["~> 1.0"])
       s.add_runtime_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_development_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.4.0"])
@@ -327,6 +373,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<contextify>, ["~> 0.1.5"])
       s.add_dependency(%q<pullr>, ["~> 0.1.2"])
       s.add_dependency(%q<thor>, ["~> 0.13.0"])
+      s.add_dependency(%q<thin>, ["~> 1.2.5"])
+      s.add_dependency(%q<rack>, ["~> 1.1.0"])
+      s.add_dependency(%q<sinatra>, ["~> 1.0"])
       s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
       s.add_dependency(%q<rake>, ["~> 0.8.7"])
       s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
@@ -351,6 +400,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<contextify>, ["~> 0.1.5"])
     s.add_dependency(%q<pullr>, ["~> 0.1.2"])
     s.add_dependency(%q<thor>, ["~> 0.13.0"])
+    s.add_dependency(%q<thin>, ["~> 1.2.5"])
+    s.add_dependency(%q<rack>, ["~> 1.1.0"])
+    s.add_dependency(%q<sinatra>, ["~> 1.0"])
     s.add_dependency(%q<ronin-support>, ["~> 0.1.0"])
     s.add_dependency(%q<rake>, ["~> 0.8.7"])
     s.add_dependency(%q<jeweler>, ["~> 1.4.0"])
