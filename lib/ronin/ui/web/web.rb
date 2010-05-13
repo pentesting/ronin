@@ -37,7 +37,7 @@ module Ronin
       DEFAULT_PORT = 3030
 
       # Default server to run under
-      DEFAULT_SERVER = 'Thin'
+      DEFAULT_SERVER = 'WEBrick'
 
       #
       # The sub-apps that are available to the Web UI.
@@ -82,7 +82,7 @@ module Ronin
       end
 
       #
-      # Starts the Ronin Web UI using the Thin web server.
+      # Starts the Ronin Web UI using a web server.
       #
       # @param [Hash] options
       #   Additional options.
