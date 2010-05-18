@@ -18,6 +18,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ronin/model/types/description'
 require 'ronin/model/model'
 
 module Ronin
@@ -33,7 +34,7 @@ module Ronin
           include Ronin::Model
 
           # The description of the model
-          property :description, Text
+          property :description, Model::Types::Description
 
           #
           # Finds models with descriptions containing a given fragment of
@@ -50,31 +51,6 @@ module Ronin
           #
           def self.describing(fragment)
             self.all(:description.like => "%#{fragment}%")
-          end
-          #
-          # Strips leading and trailing white-space from each line, then sets
-          # the description property.
-          #
-          # @param [String] new_text
-          #   The new description to use.
-          #
-          # @example
-          #   self.description = %{
-          #     Some text here.
-          #
-          #     More text.
-          #   }
-          #
-          # @since 0.3.0
-          #
-          def description=(new_text)
-            sanitized_lines = []
-
-            new_text.to_s.each_line do |line|
-              sanitized_lines << line.strip
-            end
-
-            attribute_set(:description,sanitized_lines.join("\n").strip)
           end
         end
       end

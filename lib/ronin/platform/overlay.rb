@@ -30,6 +30,9 @@ require 'ronin/model'
 
 require 'pullr'
 require 'data_paths'
+
+# require 'java' to work around a nokogiri/jruby bug
+require 'java' if RUBY_PLATFORM.include?('java')
 require 'nokogiri'
 
 module Ronin
@@ -149,7 +152,7 @@ module Ronin
       # @yieldparam [Overlay] overlay
       #   The newly created overlay.
       #
-      def initialize(attributes={},&block)
+      def initialize(attributes={})
         super(attributes)
 
         @lib_dir = self.path.join(LIB_DIR)
@@ -161,7 +164,7 @@ module Ronin
 
         initialize_metadata()
 
-        block.call(self) if block
+        yield self if block_given?
       end
 
       #
@@ -339,12 +342,12 @@ module Ronin
       #
       # @since 0.4.0
       #
-      def Overlay.update!(&block)
+      def Overlay.update!
         Overlay.all.each do |overlay|
           # update the overlay's contents
           overlay.update!
 
-          block.call(overlay) if block
+          yield overlay if block_given?
         end
       end
 
@@ -432,7 +435,7 @@ module Ronin
       #   The names of all extensions within the overlay.
       #
       def extensions
-        extension_paths.map { |dir| File.basename(dir).gsub(/\.rb$/,'') }
+        extension_paths.map { |dir| File.basename(dir).chomp('.rb') }
       end
 
       #
@@ -575,7 +578,7 @@ module Ronin
       #
       # @since 0.4.0
       #
-      def update!(&block)
+      def update!
         local_repo = Pullr::LocalRepository.new(
           :path => self.path,
           :scm => self.scm
@@ -593,7 +596,7 @@ module Ronin
           sync_cached_files!
         end
 
-        block.call(self) if block
+        yield self if block_given?
         return self
       end
 
@@ -612,7 +615,7 @@ module Ronin
       #
       # @since 0.4.0
       #
-      def uninstall!(&block)
+      def uninstall!
         deactivate!
 
         FileUtils.rm_rf(self.path) if self.installed?
@@ -623,7 +626,7 @@ module Ronin
         # remove the overlay from the database
         destroy if saved?
 
-        block.call(self) if block
+        yield self if block_given?
         return self
       end
 

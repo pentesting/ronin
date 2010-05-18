@@ -37,7 +37,7 @@ module Ronin
       DEFAULT_PORT = 3030
 
       # Default server to run under
-      DEFAULT_SERVER = 'Thin'
+      DEFAULT_SERVER = 'WEBrick'
 
       #
       # The sub-apps that are available to the Web UI.
@@ -82,10 +82,13 @@ module Ronin
       end
 
       #
-      # Starts the Ronin Web UI using the Thin web server.
+      # Starts the Ronin Web UI using a web server.
       #
       # @param [Hash] options
       #   Additional options.
+      #
+      # @option options [String] :server (DEFAULT_SERVER)
+      #   The Rack Server to use.
       #
       # @option options [String] :host (DEFAULT_HOST)
       #   The interface to bind to.
@@ -96,7 +99,7 @@ module Ronin
       # @since 0.4.0
       #
       def Web.start(options={})
-        Rack::Handler.get(DEFAULT_SERVER).run(
+        Rack::Handler.get(options[:server] || DEFAULT_SERVER).run(
           Web.application,
           :Host => (options[:host] || DEFAULT_HOST),
           :Port => (options[:port] || DEFAULT_PORT)

@@ -18,36 +18,44 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'ronin/ui/command_line/command'
-require 'ronin/ui/web'
+require 'dm-core'
 
 module Ronin
-  module UI
-    module CommandLine
-      module Commands
-        class WebUI < Command
+  module Model
+    module Types
+      class Description < DataMapper::Type
 
-          desc 'Starts the Ronin Web UI'
-          class_option :server, :default => Web::DEFAULT_SERVER, :aliases => '-S'
-          class_option :host, :default => Web::DEFAULT_HOST,  :aliases => '-I'
-          class_option :port, :default => Web::DEFAULT_PORT, :aliases => '-p'
-          class_option :deveopment, :type => :boolean, :aliases => '--dev'
-          class_option :skip_intro, :type => :boolean
+        primitive DataMapper::Types::Text
 
-          #
-          # Starts the local Ronin Web UI.
-          #
-          def execute
-            Web::Apps::Root.skip_intro = options.skip_intro?
+        #
+        # Typecasts the description.
+        #
+        # @param [Object] value
+        #   The text of the description.
+        #
+        # @param [DataMapper::Property] property
+        #   The description property.
+        #
+        # @return [String, nil]
+        #   The typecasted description.
+        #
+        # @since 0.4.0
+        #
+        def self.typecast(value,property)
+          case value
+          when nil
+            nil
+          else
+            sanitized_lines = []
 
-            Web.start(
-              :server => options[:server],
-              :host => options[:host],
-              :port => options[:port]
-            )
+            value.to_s.each_line do |line|
+              sanitized_lines << line.strip
+            end
+
+            return sanitized_lines.join("\n").strip
           end
-
         end
+
       end
     end
   end

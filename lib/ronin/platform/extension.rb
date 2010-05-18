@@ -141,7 +141,10 @@ module Ronin
       #   The list of public methods exposed by the extension.
       #
       def exposed_methods
-        methods(false).sort.map { |name| name.to_sym }
+        ext_methods = methods(false).sort
+
+        ext_methods.map! { |name| name.to_sym }
+        return ext_methods
       end
 
       #
@@ -184,7 +187,7 @@ module Ronin
       #     puts "Extension #{ext} has been setup..."
       #   end
       #
-      def setup!(&block)
+      def setup!
         unless @setup
           @setup_blocks.each do |setup_block|
             setup_block.call(self) if setup_block
@@ -194,7 +197,7 @@ module Ronin
           @toredown = false
         end
 
-        block.call(self) if block
+        yield self if block_given?
         return self
       end
 
@@ -228,8 +231,8 @@ module Ronin
       #     puts "Extension #{ext} is being tore down..."
       #   end
       #
-      def teardown!(&block)
-        block.call(self) if block
+      def teardown!
+        yield self if block_given?
 
         unless @toredown
           @teardown_blocks.each do |teardown_block|

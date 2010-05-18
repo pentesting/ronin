@@ -19,6 +19,7 @@
 #
 
 require 'ronin/model/lazy_upgrade'
+require 'ronin/model/types'
 
 require 'extlib'
 require 'dm-core'
@@ -33,6 +34,7 @@ module Ronin
   #
   module Model
     include DataMapper::Types
+    include Model::Types
 
     def self.included(base)
       base.module_eval do
@@ -44,6 +46,7 @@ module Ronin
         include DataMapper::Types
         include DataMapper::Migrations
         include Model::LazyUpgrade
+        include Model::Types
 
         #
         # The default name to use when defining relationships with the
@@ -92,7 +95,7 @@ module Ronin
     # @return [Hash{String => String}]
     #   A hash of the humanly readable names and values of the attributes.
     #
-    def humanize_attributes(options={},&block)
+    def humanize_attributes(options={})
       exclude = [:id, :type]
 
       if options[:exclude]
@@ -121,7 +124,10 @@ module Ronin
             name = Extlib::Inflection.humanize(name)
             value = formatter.call(value)
 
-            block.call(name,value) if block
+            if block_given?
+              yield name, value
+            end
+
             formatted[name] = value
           end
         end
