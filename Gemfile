@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 DATA_MAPPER = 'http://github.com/datamapper'
 RONIN = 'http://github.com/ronin-ruby'
 
+gem 'ruby-debug19'
+
 if ENV['EXTLIB']
   gem 'extlib',		'~> 0.9.15'
 else

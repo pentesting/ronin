@@ -55,7 +55,12 @@ describe Platform::Cacheable do
   end
 
   describe "cached" do
-    subject { CacheableModel.first }
+    subject do
+      require 'ruby-debug'
+      debugger
+
+      CacheableModel.first
+    end
 
     it "should have a cached_file resource" do
       subject.cached_file.should_not be_nil
